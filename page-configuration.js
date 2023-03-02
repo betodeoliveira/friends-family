@@ -1,0 +1,1 @@
+$(document.body).css("background-color", $(".content-wrapper").css("background-color"));

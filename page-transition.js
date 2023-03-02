@@ -13,6 +13,9 @@ $(".navbar_menu-link:not(.w--current").on("click", function (e) {
     nextPageLink = $(this).attr("href");
     navbarLinksColor = $(this).attr("navbar-links-color");
     transitionType = $(this).attr("transition-type");
+    if($(this).attr("override-background-color")) {
+        $(document.body).css("background-color", $(this).attr("override-background-color"));
+    }
     // Grab the content of the next page
     $.ajax({
         url: nextPageLink,
@@ -45,6 +48,7 @@ function pageTransition() {
         pageTransitionTl.to(
             ".content-wrapper.first",
             {
+                opacity: 0,
                 scale: 0.7,
                 duration: 0.3,
                 ease: "power1.out"

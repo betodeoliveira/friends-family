@@ -32,6 +32,6 @@ Webflow.push(function () {
         myVideo.get(0).play();
         myVideo.prop('muted', true);
         gsap.to($(".home-hero_background-video"), { opacity: 1, duration: backgroundVideoFadeInTime });
-        gsap.to($(".navbar_component"), { opacity: 1, duration: navbarFadeInTime });
+        gsap.to($(".navbar_menu-layout"), { opacity: 1, duration: navbarFadeInTime });
     }
 });
