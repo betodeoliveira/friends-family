@@ -1,4 +1,4 @@
-$(".work_item-embed-thumb").each(function (index) {
+$(".work_item-thumb-embed").each(function (index) {
     $("video", this).get(0).pause();
 });
 
@@ -13,6 +13,7 @@ $(".work_item-wrapper").each(function (index) {
         resetOnEnd: true
     });
 
+    // Creates the timeline animation
     let playerTimeLine = gsap.timeline({
         paused: true,
     });
