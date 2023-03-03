@@ -52,8 +52,7 @@ function pageTransition() {
                 scale: 0.7,
                 duration: 0.3,
                 ease: "power1.out"
-            },
-            0
+            }, 0
         );
     }
     // Fade

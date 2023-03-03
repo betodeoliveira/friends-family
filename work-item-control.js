@@ -18,37 +18,26 @@ $(".work_item-wrapper").each(function (index) {
         paused: true,
     });
 
-    playerTimeLine.fromTo($(this).find(".work_item-player-background"), {
+    playerTimeLine.from($(this).find(".work_item-player-background"), {
         opacity: 0,
-    }, {
-        opacity: 1,
         duration: 0.5
     });
 
-    playerTimeLine.fromTo($(this).find(".div-aspect-16x9"), {
+    playerTimeLine.from($(this).find(".div-aspect-16x9"), {
         y: "10rem",
-        opacity: 0
-    }, {
-        y: "0rem",
-        opacity: 1,
+        opacity: 0,
         duration: 0.5,
         ease: "power2.out"
     }, 0);
 
-    playerTimeLine.fromTo($(this).find(".work_item-player-title"), {
+    playerTimeLine.from($(this).find(".work_item-player-title"), {
         y: "10rem",
-        opacity: 0
-    }, {
-        y: "0rem",
-        opacity: 1,
-        duration: 0.5,
+        opacity: 0,duration: 0.5,
         ease: "power2.out"
     }, 0.25);
 
     playerTimeLine.fromTo($(workItemPlayerClose), {
         opacity: 0,
-    }, {
-        opacity: 1,
         duration: 0.5
     }, 0.25);
 
