@@ -8,6 +8,10 @@ $(".work_item-wrapper").each(function (index) {
     let workItemButton = $(this).find(".work_item-button");
     let workItemPlayerComponent = $(this).find(".work_item-player-component");
     let workItemPlayerClose = $(this).find(".work_item-player-close");
+    let workItemThumbPlayer = new Plyr($(this).find(".plyr_thumb")[0], {
+        controls: [],
+        resetOnEnd: true
+    });
     let workItemPlayer = new Plyr($(this).find(".plyr_video")[0], {
         controls: ["play", "progress", "current-time", "mute", "fullscreen"],
         resetOnEnd: true
@@ -54,16 +58,18 @@ $(".work_item-wrapper").each(function (index) {
     $(workItemButton).on("mouseenter", function () {
         // console.log("hovering item");
         $(workItemThumbComponent).css("opacity", "1");
-        $(workItemThumbComponent).find('video').get(0).play();
+        workItemThumbPlayer.play();
+        // $(workItemThumbComponent).find('video').get(0).play();
     });
 
     // Hides animated thumb on leave
     $(workItemButton).on(".work_item-button").on("mouseleave", function () {
         // console.log("hovering out item");
         $(workItemThumbComponent).css("opacity", "0");
-        $(workItemThumbComponent).find('video').get(0).pause();
+        workItemThumbPlayer.pause();
+        // $(workItemThumbComponent).find('video').get(0).pause();
         // Reset video timeline to beginning
-        $(workItemThumbComponent).find('video').get(0).currentTime = 0;
+        // $(workItemThumbComponent).find('video').get(0).currentTime = 0;
     });
 
     // Sets what happen when the work item is clicked

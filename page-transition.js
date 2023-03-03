@@ -13,6 +13,7 @@ $(".navbar_menu-link:not(.w--current").on("click", function (e) {
     menuLinkElement = $(this);
     nextPageLink = $(this).attr("href");
     pageBackgroundColor = $(this).attr("page-background-color");
+    navbarLinksColor = $(this).attr("navbar-links-color");
     contentAnimType = $(this).attr("content-anim-type");
 
     // Grab the content of the next page
@@ -35,10 +36,12 @@ function pageTransition() {
         paused: false,
         onComplete: updatePage
     });
-    // Animates the next page content
+    // The current content shouldn't be clickable
+    $(".content-wrapper.first").css("pointer-events", "none");
+    // Animates the next page content based on the anim type
     $(".content-wrapper.second").css("z-index", "3");
-    // 
-    if(contentAnimType == "regular") {
+    // Creates the timeline animations
+    if (contentAnimType == "regular") {
         pageTransitionTl.from(".content-wrapper.second", {
             y: "50vh",
             opacity: 0,
@@ -50,7 +53,7 @@ function pageTransition() {
     else {
         pageTransitionTl.from($(".director_item-button"), {
             opacity: 0,
-            duration: .5,
+            duration: 0.5,
             ease: "power1.out",
             stagger: { amount: 1, from: "random" }
         });
@@ -59,7 +62,7 @@ function pageTransition() {
     pageTransitionTl.to(".content-wrapper.first",
         {
             opacity: 0,
-            duration: 0.3,
+            duration: 0.5,
             ease: "power1.out"
         }, 0);
     // Start changing the background color
