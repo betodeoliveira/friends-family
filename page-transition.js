@@ -89,12 +89,6 @@ function pageTransition() {
         duration: 0.5,
         ease: "power1.out"
     }, 0);
-    // Changes the navbar backgrounf color
-    pageTransitionTl.to(".navbar_background-color", {
-        backgroundColor: pageBackgroundColor,
-        duration: 0.5,
-        ease: "power1.out"
-    }, 0);
 }
 
 function updatePage() {
