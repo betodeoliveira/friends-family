@@ -4,6 +4,7 @@ let menuLinkElement;
 let nextPageLink;
 let pageBackgroundColor;
 let navbarLinksColor;
+let contentAnimType;
 
 $(".navbar_menu-link:not(.w--current").on("click", function (e) {
     // Prevents the link to load the page
@@ -12,7 +13,7 @@ $(".navbar_menu-link:not(.w--current").on("click", function (e) {
     menuLinkElement = $(this);
     nextPageLink = $(this).attr("href");
     pageBackgroundColor = $(this).attr("page-background-color");
-    navbarLinksColor = $(this).attr("navbar-links-color");
+    contentAnimType = $(this).attr("content-anim-type");
 
     // Grab the content of the next page
     $.ajax({
@@ -36,12 +37,29 @@ function pageTransition() {
     });
     // Animates the next page content
     $(".content-wrapper.second").css("z-index", "3");
-    $(".content-wrapper.second").css("opacity", "0");
+    // 
+    if(contentAnimType == "reguler") {
+        pageTransitionTl.from(".content-wrapper.second", {
+            y: "50vh",
+            opacity: 0,
+            delay: 0,
+            duration: 0.5,
+            ease: "power2.out"
+        });
+    }
+    else {
+        pageTransitionTl.from($(".director_item-button"), {
+            opacity: 0,
+            duration: .5,
+            ease: "power1.out",
+            stagger: { amount: 1, from: "random" }
+        });
+    }
     // Animates the current page content
     pageTransitionTl.to(".content-wrapper.first",
         {
             opacity: 0,
-            duration: 0.5,
+            duration: 0.3,
             ease: "power1.out"
         }, 0
     );
