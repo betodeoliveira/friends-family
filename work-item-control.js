@@ -15,6 +15,7 @@ $(".work_item-wrapper").each(function (index) {
     });
     let workItemPlayer = new Plyr($(this).find(".plyr_video")[0], {
         controls: ["play", "progress", "current-time", "mute", "fullscreen"],
+        volume: 1,
         resetOnEnd: true
     });
 
