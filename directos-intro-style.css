@@ -1,0 +1,8 @@
+/* Makes the texts that are being animated invisble */
+.director_item-button {
+	opacity: 0;
+}
+/* Makes it visible if it is in edit mode */
+html.w-editor .director_item-button {
+	opacity: 1;
+}

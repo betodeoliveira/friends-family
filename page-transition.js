@@ -2,7 +2,6 @@
 $(".content-wrapper").addClass("first");
 let menuLinkElement;
 let nextPageLink;
-let transitionType;
 let pageBackgroundColor;
 let navbarLinksColor;
 
@@ -12,7 +11,6 @@ $(".navbar_menu-link:not(.w--current").on("click", function (e) {
     // Sets the variables
     menuLinkElement = $(this);
     nextPageLink = $(this).attr("href");
-    transitionType = $(this).attr("transition-type");
     pageBackgroundColor = $(this).attr("page-background-color");
     navbarLinksColor = $(this).attr("navbar-links-color");
 
@@ -31,46 +29,22 @@ $(".navbar_menu-link:not(.w--current").on("click", function (e) {
 
 function pageTransition() {
     $("html").addClass("animating");
-    // GSAP
+    // Creates the timeline
     let pageTransitionTl = gsap.timeline({
         paused: false,
         onComplete: updatePage
     });
-    // Plays a different animation deppending on the transition type attribute
-    if (transitionType == "slide-from-bottom") {
-        $(".content-wrapper.second").css("z-index", "3");
-        pageTransitionTl.from(".content-wrapper.second", {
-            y: "110vh",
-            opacity: 0,
-            delay: 0.2,
-            duration: 0.8,
-            ease: "power2.out"
-        });
-        pageTransitionTl.to(".content-wrapper.first",
-            {
-                opacity: 0,
-                //scale: 0.7,
-                duration: 0.3,
-                ease: "power1.out"
-            }, 0
-        );
-    }
-    // Fade
-    else {
-        pageTransitionTl.to(".content-wrapper.first", {
+    // Animates the next page content
+    $(".content-wrapper.second").css("z-index", "3");
+    $(".content-wrapper.second").css("opacity", "0");
+    // Animates the current page content
+    pageTransitionTl.to(".content-wrapper.first",
+        {
             opacity: 0,
             duration: 0.5,
             ease: "power1.out"
-        });
-        pageTransitionTl.fromTo(".content-wrapper.second", {
-            opacity: 0
-        },
-            {
-                opacity: 1,
-                duration: 0.5,
-                ease: "power1.out"
-            }, 0);
-    }
+        }, 0
+    );
     // Start changing the background color
     pageTransitionTl.to(".page-background-color", {
         backgroundColor: pageBackgroundColor,

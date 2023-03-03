@@ -37,6 +37,11 @@ ScrollTrigger.create({
     }
 });
 
+// Prevent the current link to be cliekd
+$(".navbar_menu-link.w--current").on("click", function (e) {
+    e.preventDefault();
+});
+
 // When a link is clicked grow back the navbar
 $(".navbar_menu-link:not(.w--current").on("click", function (e) {
     $(".navbar_background-color").css("opacity", "0");
