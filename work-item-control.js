@@ -2,6 +2,8 @@ $(".work_item-thumb-embed").each(function (index) {
     $("video", this).get(0).pause();
 });
 
+let initialNavbarFontSize = $(".navbar_menu-link").css("font-size");
+
 $(".work_item-wrapper").each(function (index) {
     let workItemThumbComponent = $(this).find(".work_item-thumb-component");
     let workItemButton = $(this).find(".work_item-button");
@@ -17,13 +19,6 @@ $(".work_item-wrapper").each(function (index) {
         volume: 1,
         resetOnEnd: true
     });
-
-    if($(".navbar_menu-link").css("font-size") == "2vw") {
-        $(".work_item-player-wrapper").css("padding-top", "10vw");
-    }
-    else {
-        $(".work_item-player-wrapper").css("padding-top", "14vw");
-    }
 
     // Creates the timeline animation
     let playerTimeLine = gsap.timeline({
@@ -79,6 +74,13 @@ $(".work_item-wrapper").each(function (index) {
     // Sets what happen when the work item is clicked
     $(workItemButton).on("click", function () {
         // console.log("Open player");
+        let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
+        if(initialNavbarFontSize != currentNavbarFontSize) {
+            $(".work_item-player-wrapper").css("padding-top", "10vw");
+        }
+        else {
+            $(".work_item-player-wrapper").css("padding-top", "14vw");
+        }
         $(workItemPlayerComponent).css("display", "flex");
         playerTimeLine.play();
         setTimeout(() => {
