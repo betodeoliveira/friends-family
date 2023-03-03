@@ -21,26 +21,33 @@ $(".work_item-wrapper").each(function (index) {
     playerTimeLine.from($(this).find(".work_item-player-background"), {
         opacity: 0,
         duration: 0.5
-    });
+});
 
-    playerTimeLine.from($(this).find(".div-aspect-16x9"), {
+    playerTimeLine.fromTo($(this).find(".div-aspect-16x9"), {
         y: "10rem",
-        opacity: 0,
+        opacity: 0
+    }, {
+        y: "0rem",
+        opacity: 1,
         duration: 0.5,
         ease: "power2.out"
     }, 0);
 
-    playerTimeLine.from($(this).find(".work_item-player-title"), {
+    playerTimeLine.fromTo($(this).find(".work_item-player-title"), {
         y: "10rem",
-        opacity: 0,
+        opacity: 0
+    }, {
+        y: "0rem",
+        opacity: 1,
         duration: 0.5,
         ease: "power2.out"
     }, 0.25);
 
-    playerTimeLine.from($(workItemPlayerClose), {
+    playerTimeLine.fromTo($(workItemPlayerClose), {
         opacity: 0,
-        duration: 0.5,
-        ease: "power2.out"
+    }, {
+        opacity: 1,
+        duration: 0.5
     }, 0.25);
 
     // Shows animated thumb on hover
