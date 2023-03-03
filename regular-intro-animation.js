@@ -2,11 +2,13 @@ let regularIntroAnimTl = gsap.timeline({
     paused: true
 });
 
-regularIntroAnimTl.from($(".content-wrapper"),
-{
+regularIntroAnimTl.fromTo($(this).find(".content-wrapper"), {
     y: "50vh",
-    opacity: 0,
-    duration: .5,
+    opacity: 0
+}, {
+    y: "0vh",
+    opacity: 1,
+    duration: 0.5,
     ease: "power1.out"
 });
 
