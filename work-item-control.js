@@ -10,6 +10,7 @@ $(".work_item-wrapper").each(function (index) {
     let workItemPlayerClose = $(this).find(".work_item-player-close");
     let workItemThumbPlayer = new Plyr($(this).find(".plyr_thumb")[0], {
         controls: [],
+        volume: 0,
         resetOnEnd: true
     });
     let workItemPlayer = new Plyr($(this).find(".plyr_video")[0], {
@@ -66,7 +67,7 @@ $(".work_item-wrapper").each(function (index) {
     $(workItemButton).on(".work_item-button").on("mouseleave", function () {
         // console.log("hovering out item");
         $(workItemThumbComponent).css("opacity", "0");
-        workItemThumbPlayer.pause();
+        workItemThumbPlayer.stop();
         // $(workItemThumbComponent).find('video').get(0).pause();
         // Reset video timeline to beginning
         // $(workItemThumbComponent).find('video').get(0).currentTime = 0;
