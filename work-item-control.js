@@ -88,8 +88,9 @@ $(".work_item-wrapper").each(function (index) {
     $(workItemPlayerClose).on("click", function () {
         // console.log("Close player");
         playerTimeLine.reverse();
-        workItemVideoPlayer.stop();
+        workItemVideoPlayer.pause();
         setTimeout(() => {
+            workItemVideoPlayer.stop();
             $(workItemPlayerComponent).css("display", "none");
         }, 1000);
     });
