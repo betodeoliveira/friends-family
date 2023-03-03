@@ -76,7 +76,7 @@ $(".work_item-wrapper").each(function (index) {
         // console.log("Open player");
         let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
         if(initialNavbarFontSize != currentNavbarFontSize) {
-            $(".work_item-player-wrapper").css("padding-top", "10vw");
+            $(".work_item-player-wrapper").css("padding-top", "8vw");
         }
         else {
             $(".work_item-player-wrapper").css("padding-top", "14vw");
