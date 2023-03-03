@@ -11,5 +11,5 @@ regularIntroAnimTl.from($(".director_item-button"),
 });
 
 window.addEventListener("DOMContentLoaded", (event) => {
-    directorItemButtonTl.play();
+    regularIntroAnimTl.play();
 });
