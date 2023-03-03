@@ -19,7 +19,7 @@ navbarShrinkTl.to(".navbar_menu-link", {
 // Animates the background color
 navbarShrinkTl.to(".navbar_background-color", {
     opacity: 1,
-    duration: 0.125,
+    duration: 0.5,
     ease: "power2.out",
 }, 0);
 
