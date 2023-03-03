@@ -2,7 +2,7 @@ let regularIntroAnimTl = gsap.timeline({
     paused: true
 });
 
-regularIntroAnimTl.from($(".director_item-button"),
+regularIntroAnimTl.from($(".content-wrapper"),
 {
     y: "50vh",
     opacity: 0,
