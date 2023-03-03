@@ -13,7 +13,7 @@ $(".work_item-wrapper").each(function (index) {
         volume: 0,
         resetOnEnd: true
     });
-    let workItemPlayer = new Plyr($(this).find(".plyr_video")[0], {
+    let workItemVideoPlayer = new Plyr($(this).find(".plyr_video")[0], {
         controls: ["play", "progress", "current-time", "mute", "fullscreen"],
         volume: 1,
         resetOnEnd: true
@@ -80,7 +80,7 @@ $(".work_item-wrapper").each(function (index) {
         $(workItemPlayerComponent).css("display", "flex");
         playerTimeLine.play();
         setTimeout(() => {
-            workItemPlayer.play();
+            workItemVideoPlayer.play();
         }, 500);
     });
 
@@ -88,8 +88,8 @@ $(".work_item-wrapper").each(function (index) {
     $(workItemPlayerClose).on("click", function () {
         // console.log("Close player");
         playerTimeLine.reverse();
+        workItemVideoPlayer.stop();
         setTimeout(() => {
-            workItemPlayer.stop();
             $(workItemPlayerComponent).css("display", "none");
         }, 1000);
     });
