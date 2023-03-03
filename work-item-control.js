@@ -3,7 +3,6 @@ $(".work_item-thumb-embed").each(function (index) {
 });
 
 $(".work_item-wrapper").each(function (index) {
-
     let workItemThumbComponent = $(this).find(".work_item-thumb-component");
     let workItemButton = $(this).find(".work_item-button");
     let workItemPlayerComponent = $(this).find(".work_item-player-component");
@@ -18,6 +17,13 @@ $(".work_item-wrapper").each(function (index) {
         volume: 1,
         resetOnEnd: true
     });
+
+    if($(".navbar_menu-link").css("font-size") == "2vw") {
+        $(".work_item-player-wrapper").css("margin-top", "10vw");
+    }
+    else {
+        $(".work_item-player-wrapper").css("margin-top", "14vw");
+    }
 
     // Creates the timeline animation
     let playerTimeLine = gsap.timeline({
@@ -61,7 +67,6 @@ $(".work_item-wrapper").each(function (index) {
         // console.log("hovering item");
         $(workItemThumbComponent).css("opacity", "1");
         workItemThumbPlayer.play();
-        // $(workItemThumbComponent).find('video').get(0).play();
     });
 
     // Hides animated thumb on leave
@@ -69,9 +74,6 @@ $(".work_item-wrapper").each(function (index) {
         // console.log("hovering out item");
         $(workItemThumbComponent).css("opacity", "0");
         workItemThumbPlayer.stop();
-        // $(workItemThumbComponent).find('video').get(0).pause();
-        // Reset video timeline to beginning
-        // $(workItemThumbComponent).find('video').get(0).currentTime = 0;
     });
 
     // Sets what happen when the work item is clicked
