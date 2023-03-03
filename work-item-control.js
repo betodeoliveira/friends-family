@@ -19,10 +19,10 @@ $(".work_item-wrapper").each(function (index) {
     });
 
     if($(".navbar_menu-link").css("font-size") == "2vw") {
-        $(".work_item-player-wrapper").css("margin-top", "10vw");
+        $(".work_item-player-wrapper").css("padding-top", "10vw");
     }
     else {
-        $(".work_item-player-wrapper").css("margin-top", "14vw");
+        $(".work_item-player-wrapper").css("padding-top", "14vw");
     }
 
     // Creates the timeline animation
