@@ -32,11 +32,11 @@ $(".work_item-wrapper").each(function (index) {
 
     playerTimeLine.from($(this).find(".work_item-player-title"), {
         y: "10rem",
-        opacity: 0,duration: 0.5,
+        opacity: 0, duration: 0.5,
         ease: "power2.out"
     }, 0.25);
 
-    playerTimeLine.fromTo($(workItemPlayerClose), {
+    playerTimeLine.from($(workItemPlayerClose), {
         opacity: 0,
         duration: 0.5
     }, 0.25);
