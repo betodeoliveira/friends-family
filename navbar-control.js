@@ -5,7 +5,11 @@ $(".navbar_background-color").css("background-color", $(".navbar_component").css
 let shrinkFontSize = "2vw";
 
 // Creates the shrink timeline
-let navbarShrinkTl = gsap.timeline({
+let navbarFontSizeTl = gsap.timeline({
+    paused: true
+});
+
+let navbarBackgroundTl = gsap.timeline({
     paused: true
 });
 
