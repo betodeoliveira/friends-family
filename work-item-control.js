@@ -7,7 +7,7 @@ $(".work_item-wrapper").each(function (index) {
     let workItemThumbComponent = $(this).find(".work_item-thumb-component");
     let workItemButton = $(this).find(".work_item-button");
     let workItemPlayerComponent = $(this).find(".work_item-player-component");
-    let workItemPlayerClose = $(this).find(".work_item-player-close-button");
+    let workItemPlayerClose = $(this).find(".work_item-player-close");
     let workItemPlayer = new Plyr($(this).find(".plyr_video")[0], {
         controls: ["play", "progress", "current-time", "mute", "fullscreen"],
         resetOnEnd: true
@@ -37,9 +37,10 @@ $(".work_item-wrapper").each(function (index) {
         ease: "power2.out"
     }, 0.25);
 
-    playerTimeLine.from($(this).find(".work_item-player-close-button"), {
+    playerTimeLine.from($(workItemPlayerClose), {
         opacity: 0,
-        duration: 0.5
+        duration: 0.5,
+        ease: "power2.out"
     }, 0.25);
 
     // Shows animated thumb on hover
