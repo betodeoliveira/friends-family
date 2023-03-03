@@ -38,7 +38,7 @@ function pageTransition() {
     // Animates the next page content
     $(".content-wrapper.second").css("z-index", "3");
     // 
-    if(contentAnimType == "reguler") {
+    if(contentAnimType == "regular") {
         pageTransitionTl.from(".content-wrapper.second", {
             y: "50vh",
             opacity: 0,
@@ -61,8 +61,7 @@ function pageTransition() {
             opacity: 0,
             duration: 0.3,
             ease: "power1.out"
-        }, 0
-    );
+        }, 0);
     // Start changing the background color
     pageTransitionTl.to(".page-background-color", {
         backgroundColor: pageBackgroundColor,
