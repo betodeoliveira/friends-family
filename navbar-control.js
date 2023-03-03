@@ -5,23 +5,19 @@ $(".navbar_background-color").css("background-color", $(".navbar_component").css
 let shrinkFontSize = "2vw";
 
 // Creates the shrink timeline
-let navbarFontSizeTl = gsap.timeline({
-    paused: true
-});
-
-let navbarBackgroundTl = gsap.timeline({
+let navbarShrinkTl = gsap.timeline({
     paused: true
 });
 
 // Animates the font size
-navbarFontSizeTl.to(".navbar_menu-link", {
+navbarShrinkTl.to(".navbar_menu-link", {
     fontSize: shrinkFontSize,
     duration: 0.5,
     ease: "power2.out",
 });
 
 // Animates the background color
-navbarBackgroundTl.to(".navbar_background-color", {
+navbarShrinkTl.to(".navbar_background-color", {
     opacity: 1,
     duration: 0.125,
     ease: "power2.out",
@@ -34,12 +30,10 @@ ScrollTrigger.create({
     end: "top top",
     markers: false,
     onEnter: () => {
-        navbarFontSizeTl.play();
-        navbarBackgroundTl.play();
+        navbarShrinkTl.play();
     },
     onEnterBack: () => {
-        navbarFontSizeTl.reverse();
-        navbarBackgroundTl.reverse();
+        navbarShrinkTl.reverse();
     }
 });
 
@@ -51,5 +45,5 @@ $(".navbar_menu-link.w--current").on("click", function (e) {
 // When a link is clicked grow back the navbar
 $(".navbar_menu-link:not(.w--current").on("click", function (e) {
     $(".navbar_background-color").css("opacity", "0");
-    navbarFontSizeTl.reverse();
+    navbarShrinkTl.reverse();
 });
