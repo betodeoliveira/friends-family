@@ -80,8 +80,8 @@ $(".work_item-wrapper").each(function (index) {
     $(workItemPlayerClose).on("click", function () {
         // console.log("Close player");
         playerTimeLine.reverse();
-        workItemPlayer.stop();
         setTimeout(() => {
+            workItemPlayer.stop();
             $(workItemPlayerComponent).css("display", "none");
         }, 1000);
     });
