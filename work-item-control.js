@@ -65,7 +65,7 @@ $(".work_item-wrapper").each(function (index) {
     });
 
     // Hides animated thumb on leave
-    $(workItemButton).on(".work_item-button").on("mouseleave", function () {
+    $(workItemButton).on("mouseleave", function () {
         // console.log("hovering out item");
         $(workItemThumbComponent).css("opacity", "0");
         workItemThumbPlayer.stop();
