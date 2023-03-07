@@ -51,7 +51,7 @@ function pageTransition() {
         });
     }
     else {
-        pageTransitionTl.from($(".director_item-button"), {
+        pageTransitionTl.from($(".director_item"), {
             opacity: 0,
             duration: 0.5,
             ease: "power1.out",
