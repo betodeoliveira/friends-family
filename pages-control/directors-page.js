@@ -132,11 +132,4 @@ function playDirectorLeave() {
 function gotToDirectorPage() {
     window.location = directorPageLink;
 }
-
-// Realods the page on back
-window.onpageshow = function (event) {
-    if (event.persisted) {
-        window.location.reload();
-    }
-};
 //#endregion

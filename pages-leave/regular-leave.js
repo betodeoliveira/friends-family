@@ -48,3 +48,10 @@ function playLeave() {
 function gotToNextPage() {
     window.location = nextPageLink;
 }
+
+// Realods the page on back
+window.onpageshow = function (event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+};

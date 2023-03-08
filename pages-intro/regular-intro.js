@@ -5,6 +5,7 @@ let regularIntroTimeline = gsap.timeline({
 
 // Disables page events at first
 $(".content-wrapper").css("pointer-events", "none");
+$(".content-wrapper").addClass("second");
 
 // Configurates the timeline
 regularIntroTimeline.fromTo(".content-wrapper", {
@@ -19,4 +20,5 @@ regularIntroTimeline.fromTo(".content-wrapper", {
 
 function enablePageEvents() {
     $(".content-wrapper").css("pointer-events", "auto");
+    $(".content-wrapper").removeClass("second");
 }

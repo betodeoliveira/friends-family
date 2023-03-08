@@ -1,3 +1,9 @@
+// Waits webflow anf then adds the w--current class to the directors navbar link
+var Webflow = Webflow || [];
+Webflow.push(function () {
+    $("#nav-link-directors").addClass("w--current");
+});
+
 $(".director-work_wrapper").each(function (index)
 {
     let directorWorkButton = $(this).find(".director-work_button");
