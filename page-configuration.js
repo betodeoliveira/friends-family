@@ -1,1 +1,0 @@
-$(document.body).css("background-color", $(".page-background-color").css("background-color"));

@@ -1,3 +1,7 @@
+// ATTENTION!
+// This code is just a base.
+// The code that is running is inside home-hero_background-video-code element
+
 var Webflow = Webflow || [];
 Webflow.push(function () {
     let headingFadeInFrom = "start";

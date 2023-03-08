@@ -1,6 +1,7 @@
 let nextPageLink;
 let nextPageBackgroundColor;
 let nextPageNavbarLinksColor;
+let pageLeaveTimeline;
 
 // What happens when a link from the navbar is clicked
 $(".navbar_menu-link:not(.w--current").on("click", function (e) {
@@ -14,7 +15,7 @@ $(".navbar_menu-link:not(.w--current").on("click", function (e) {
 });
 
 function playLeave() {
-    let pageLeaveTimeline = gsap.timeline({
+    pageLeaveTimeline = gsap.timeline({
         paused: false,
         onComplete: gotToNextPage
     });

@@ -1,3 +1,26 @@
+//#region [ Item Scroll ]
+const viewportWidth = (coef) => window.innerWidth * (coef / 100);
+
+// Hides the work item when it reaches the top of the screen
+$(".work_item-button").each(function (index) {
+    ScrollTrigger.create({
+        trigger: $(this),
+        start: () => 'top ' + Math.min(viewportWidth(10)) + ' top',
+        end: () => 'top ' + Math.min(viewportWidth(10)) + ' top',
+        // markers: true,
+        onEnter: () => {
+            gsap.to($(this), { x: "-4rem", ease: "power2.out", duration: 0.5 });
+            gsap.to($(this), { opacity: 0, duration: 0.25 });
+        },
+        onEnterBack: () => {
+            gsap.to($(this), { x: "0rem", ease: "power2.out", duration: 0.5 });
+            gsap.to($(this), { opacity: 1, duration: 0.5 });
+        }
+    });
+});
+//#endregion
+
+//#region [ Item Hover ]
 $(".work_item-thumb-embed").each(function (index) {
     $("video", this).get(0).pause();
 });
@@ -28,7 +51,7 @@ $(".work_item-wrapper").each(function (index) {
     playerTimeLine.from($(this).find(".work_item-player-background"), {
         opacity: 0,
         duration: 0.5
-});
+    });
 
     playerTimeLine.fromTo($(this).find(".div-aspect-16x9"), {
         y: "10rem",
@@ -75,7 +98,7 @@ $(".work_item-wrapper").each(function (index) {
     $(workItemButton).on("click", function () {
         // console.log("Open player");
         let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
-        if(initialNavbarFontSize != currentNavbarFontSize) {
+        if (initialNavbarFontSize != currentNavbarFontSize) {
             $(".work_item-player-wrapper").css("padding-top", "8vw");
         }
         else {
@@ -99,3 +122,4 @@ $(".work_item-wrapper").each(function (index) {
         }, 1000);
     });
 });
+//#endregion
