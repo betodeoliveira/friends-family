@@ -1,23 +1,29 @@
 // Sets the navbar background color
 $(".navbar_background-color").css("background-color", $(".navbar_component").css("background-color"));
 
+// Prevent the current link to be cliekd
+$(".navbar_menu-link.w--current").on("click", function (e) {
+    e.preventDefault();
+});
+
 // GSAP timeline variables
 let shrinkFontSize = "2vw";
+let navbarLinkClicked;
 
 // Creates the shrink timeline
-let navbarShrinkTl = gsap.timeline({
+let navbarShrinkTimeline = gsap.timeline({
     paused: true
 });
 
 // Animates the font size
-navbarShrinkTl.to(".navbar_menu-link", {
+navbarShrinkTimeline.to(".navbar_menu-link", {
     fontSize: shrinkFontSize,
     duration: 0.5,
     ease: "power2.out",
 });
 
 // Animates the background color
-navbarShrinkTl.to(".navbar_background-color", {
+navbarShrinkTimeline.to(".navbar_background-color", {
     opacity: 1,
     duration: 0.5,
     ease: "power2.out",
@@ -30,20 +36,35 @@ ScrollTrigger.create({
     end: "top top",
     markers: false,
     onEnter: () => {
-        navbarShrinkTl.play();
+        navbarShrinkTimeline.play();
     },
     onEnterBack: () => {
-        navbarShrinkTl.reverse();
+        navbarShrinkTimeline.reverse();
     }
 });
 
-// Prevent the current link to be cliekd
-$(".navbar_menu-link.w--current").on("click", function (e) {
-    e.preventDefault();
+navbarTransitionTimeline = gsap.timeline({
+    paused: true
 });
 
-// When a link is clicked grow back the navbar
+// When a link is cliked play the transition
 $(".navbar_menu-link:not(.w--current").on("click", function (e) {
-    $(".navbar_background-color").css("opacity", "0");
-    navbarShrinkTl.reverse();
+    navbarLinkClicked = $(this);
+
+    // Sets the current effect to the cliked link
+    navbarTransitionTimeline.to(navbarLinkClicked, {
+        opacity: 0.5,
+        duration: 0.5,
+        ease: "power1.out"
+    });
+
+    // Removes the current effect from the current link
+    navbarTransitionTimeline.to(".navbar_menu-link.w--current", {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power1.out"
+    }, 0);
+
+    navbarTransitionTimeline.play();
+    navbarShrinkTimeline.reverse();
 });
