@@ -58,6 +58,9 @@ $(".director_item-button").on("click", function (e) {
         complete: function () {
             playDirectorFlip();
             playDirectorLeave();
+            setTimeout(() => {
+                gotToDirectorPage();
+            }, 600);
         }
     });
 });
@@ -70,17 +73,13 @@ function playDirectorFlip() {
         duration: 0.5,
         ease: "power1.out"
     });
-    setTimeout(() => {
-        gotToDirectorPage();
-    }, 500);
 }
 
 function playDirectorLeave() {
     $("html").addClass("animating");
     // Creates the timeline
     directorLeaveTimeline = gsap.timeline({
-        paused: false,
-        onComplete: playFlip
+        paused: false
     });
 
     // The content shouldn't be clickable
