@@ -56,7 +56,7 @@ $(".navbar_menu-link:not(.w--current").on("click", function (e) {
     });
 
     // If exists removes the current state effect from the current link
-    if($(".navbar_menu-link.w--current")) {
+    if($(".navbar_menu-link.w--current").lenght >= 1) {
         navbarTransitionTimeline.to(".navbar_menu-link.w--current", {
             opacity: 1,
             duration: 0.5,

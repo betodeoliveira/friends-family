@@ -10,6 +10,7 @@ $(".navbar_menu-link:not(.w--current").on("click", function (e) {
     nextPageLink = $(this).attr("href");
     nextPageBackgroundColor = $(this).attr("page-background-color");
     nextPageNavbarLinksColor = $(this).attr("navbar-links-color");
+    playLeave();
 });
 
 function playLeave() {
