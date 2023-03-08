@@ -11,10 +11,12 @@ $(".work_item-button").each(function (index) {
         onEnter: () => {
             gsap.to($(this), { x: "-4rem", ease: "power2.out", duration: 0.5 });
             gsap.to($(this), { opacity: 0, duration: 0.25 });
+            gsap.set((this), {pointerEvents: "none"});
         },
         onEnterBack: () => {
             gsap.to($(this), { x: "0rem", ease: "power2.out", duration: 0.5 });
             gsap.to($(this), { opacity: 1, duration: 0.5 });
+            gsap.set((this), {pointerEvents: "auto"});
         }
     });
 });

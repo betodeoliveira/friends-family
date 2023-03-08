@@ -1,10 +1,10 @@
 let nextPageLink;
 let nextPageBackgroundColor;
 let nextPageNavbarLinksColor;
-let pageLeaveTimeline;
+let regularLeaveTimeline;
 
 // What happens when a link from the navbar is clicked
-$(".navbar_menu-link:not(.w--current").on("click", function (e) {
+$(".navbar_menu-link:not(.w--current)").on("click", function (e) {
     // Prevents the link to load the page
     e.preventDefault();
     // Sets the variables
@@ -15,7 +15,7 @@ $(".navbar_menu-link:not(.w--current").on("click", function (e) {
 });
 
 function playLeave() {
-    pageLeaveTimeline = gsap.timeline({
+    regularLeaveTimeline = gsap.timeline({
         paused: false,
         onComplete: gotToNextPage
     });
@@ -24,21 +24,21 @@ function playLeave() {
     $(".content-wrapper").css("pointer-events", "none");
 
     // Hides the current content
-    pageLeaveTimeline.to(".content-wrapper", {
+    regularLeaveTimeline.to(".content-wrapper", {
         opacity: 0,
         duration: 0.3,
         ease: "power1.out"
     });
 
     // Changes the background color
-    pageLeaveTimeline.to(".page-background-color", {
+    regularLeaveTimeline.to(".page-background-color", {
         backgroundColor: nextPageBackgroundColor,
         duration: 0.3,
         ease: "power1.out"
     }, 0);
 
     // Changes the navbar link colors
-    pageLeaveTimeline.to(".navbar_menu-link", {
+    regularLeaveTimeline.to(".navbar_menu-link", {
         color: nextPageNavbarLinksColor,
         duration: 0.5,
         ease: "power1.out"
