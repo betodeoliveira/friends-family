@@ -8,8 +8,6 @@ $(".navbar_menu-link.w--current").on("click", function (e) {
 
 // GSAP timeline variables
 let shrinkFontSize = "2vw";
-let navbarClickedLink;
-let navbarCurrentLink = $(".navbar_menu-link.w--current");
 
 // Creates the shrink timeline
 let navbarShrinkTimeline = gsap.timeline({
@@ -50,18 +48,16 @@ navbarTransitionTimeline = gsap.timeline({
 
 // When a link is cliked play the transition
 $(".navbar_menu-link:not(.w--current").on("click", function (e) {
-    navbarClickedLink = $(this);
-
     // Sets the current state effect to the cliked link
-    navbarTransitionTimeline.to(navbarClickedLink, {
+    navbarTransitionTimeline.to($(this), {
         opacity: 0.5,
         duration: 0.5,
         ease: "power1.out"
     });
 
     // If exists removes the current state effect from the current link
-    if(navbarCurrentLink){
-        navbarTransitionTimeline.to(navbarCurrentLink, {
+    if($(".navbar_menu-link.w--current")) {
+        navbarTransitionTimeline.to(".navbar_menu-link.w--current", {
             opacity: 1,
             duration: 0.5,
             ease: "power1.out"
