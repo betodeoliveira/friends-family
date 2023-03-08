@@ -21,8 +21,13 @@ navbarShrinkTimeline.to(".navbar_menu-link", {
     ease: "power2.out"
 });
 
+// Creates the background timeline
+let navbarBackgroundTimeline = gsap.timeline({
+    paused: true
+});
+
 // Animates the background color
-navbarShrinkTimeline.to(".navbar_background-color", {
+navbarBackgroundTimeline.to(".navbar_background-color", {
     opacity: 1,
     duration: 0.5,
     ease: "power2.out"
@@ -36,9 +41,11 @@ ScrollTrigger.create({
     markers: false,
     onEnter: () => {
         navbarShrinkTimeline.play();
+        navbarBackgroundTimeline.play();
     },
     onEnterBack: () => {
         navbarShrinkTimeline.reverse();
+        navbarBackgroundTimeline.reverse();
     }
 });
 
@@ -54,6 +61,7 @@ $(".navbar_menu-link:not(.w--current").on("click", function (e) {
         duration: 0.25,
         ease: "power1.out"
     });
+
     // Sets the current state effect to the cliked link
     navbarTransitionTimeline.to($(this), {
         opacity: 0.5,
