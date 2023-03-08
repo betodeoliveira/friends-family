@@ -18,14 +18,14 @@ let navbarShrinkTimeline = gsap.timeline({
 navbarShrinkTimeline.to(".navbar_menu-link", {
     fontSize: shrinkFontSize,
     duration: 0.5,
-    ease: "power2.out",
+    ease: "power2.out"
 });
 
 // Animates the background color
 navbarShrinkTimeline.to(".navbar_background-color", {
     opacity: 1,
     duration: 0.5,
-    ease: "power2.out",
+    ease: "power2.out"
 }, 0);
 
 // Creates the scroll trigger
@@ -48,12 +48,18 @@ navbarTransitionTimeline = gsap.timeline({
 
 // When a link is cliked play the transition
 $(".navbar_menu-link:not(.w--current").on("click", function (e) {
+    // Hides the background color
+    navbarTransitionTimeline.to(".navbar_background-color", {
+        opacity: 0,
+        duration: 0.25,
+        ease: "power1.out"
+    });
     // Sets the current state effect to the cliked link
     navbarTransitionTimeline.to($(this), {
         opacity: 0.5,
         duration: 0.5,
         ease: "power1.out"
-    });
+    }, 0);
 
     // If exists removes the current state effect from the current link
     if($(".navbar_menu-link.w--current").lenght >= 1) {
