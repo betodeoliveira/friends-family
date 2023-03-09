@@ -50,7 +50,6 @@ $(".fullscreen-player_component").each(function (index) {
     // Sets what happens when the player button is clicked
     $(playerShow).click(function () {
         if($(playerComponent).css("display") == "none") {
-            // console.log("Open player");
             let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
             if (playerInitialNavbarFontSize != currentNavbarFontSize) {
                 $(".fullscreen-player_wrapper").css("padding-top", "8vw");
@@ -70,7 +69,6 @@ $(".fullscreen-player_component").each(function (index) {
 
     // Sets what happens when the close button is clicked
     $(playerClose).click(function (e) {
-        // console.log("Close player");
         // Prevent the click from going to other elements and triggering the open again
         e.stopPropagation();
         playerTimeline.reverse();
