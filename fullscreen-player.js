@@ -1,12 +1,12 @@
 let playerInitialNavbarFontSize = $(".navbar_menu-link").css("font-size");
 
-$(".full-screen-player_component").each(function (index) {
+$(".fullscreen-player_component").each(function (index) {
     let playerComponent = $(this);
-    let playerShow = $(this).parents("[full-screen-player-show]");
-    let playerBackground = $(this).find(".full-screen-player_background");
+    let playerShow = $(this).parents("[fullscreen-player-show]");
+    let playerBackground = $(this).find(".fullscreen-player_background");
     let playerAspect = $(this).find(".div-aspect-16x9.is-player");
-    let playerTitle = $(this).find(".full-screen-player_title");
-    let playerClose = $(this).find(".full-screen-player_close");
+    let playerTitle = $(this).find(".fullscreen-player_title");
+    let playerClose = $(this).find(".fullscreen-player_close");
     let playerVideo = new Plyr($(this).find(".plyr_video"), {
         controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
         resetOnEnd: false
@@ -53,10 +53,10 @@ $(".full-screen-player_component").each(function (index) {
             // console.log("Open player");
             let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
             if (playerInitialNavbarFontSize != currentNavbarFontSize) {
-                $(".full-screen-player_wrapper").css("padding-top", "8vw");
+                $(".fullscreen-player_wrapper").css("padding-top", "8vw");
             }
             else {
-                $(".full-screen-player_wrapper").css("padding-top", "14vw");
+                $(".fullscreen-player_wrapper").css("padding-top", "14vw");
             }
             $(playerComponent).css("display", "flex");
             playerTimeline.play();
