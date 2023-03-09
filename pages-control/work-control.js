@@ -33,7 +33,7 @@ $(".works_item-wrapper").each(function (index) {
 
     let thumbTimeline = gsap.timeline({
         paused: true,
-        onReverseComplete: hideAboutComponent
+        onReverseComplete: hideThumbComponent
     });
 
     thumbTimeline.from(thumbComponent, {
