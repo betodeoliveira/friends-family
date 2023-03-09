@@ -24,7 +24,7 @@ $(".works_item-button").each(function (index) {
 
 //#region [ Item Hover ]
 $(".works_item-wrapper").each(function (index) {
-    let workItemButton = $(this).find(".works_item-button");
+    let workItemTitleWrapper = $(this).find(".works_item-title-wrapper");
     let thumbComponent = $(this).find(".works_item-thumb-component");
     let thumbPlayer = new Plyr($(this).find(".plyr_thumb")[0], {
         controls: [],
@@ -42,8 +42,8 @@ $(".works_item-wrapper").each(function (index) {
         ease: "power1.out"
     })
 
-    // Shows animated thumb on hover
-    $(workItemButton).on("mouseenter", function () {
+    // The hover most be done here because if we do on the works_item-wrapper the mouse leave will just play when the mouse leaves the screen
+    $(workItemTitleWrapper).on("mouseenter", function () {
         if ($(thumbComponent).css("display") == "none") {
             $(thumbComponent).css("display", "block");
             thumbPlayer.volume = 0;
@@ -54,7 +54,7 @@ $(".works_item-wrapper").each(function (index) {
     });
 
     // Hides animated thumb on leave
-    $(workItemButton).on("mouseleave", function () {
+    $(workItemTitleWrapper).on("mouseleave", function () {
         thumbTimeline.reverse();
         thumbPlayer.pause();
     });
