@@ -4,6 +4,9 @@ Webflow.push(function () {
     $("#nav-link-directors").addClass("w--current");
 });
 
+let playerTimeline;
+let initialNavbarFontSize = $(".navbar_menu-link").css("font-size");
+
 $(".director-work_wrapper").each(function (index)
 {
     let directorWorkButton = $(this).find(".director-work_button");

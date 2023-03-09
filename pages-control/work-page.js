@@ -22,7 +22,7 @@ $(".work_item-button").each(function (index) {
 });
 //#endregion
 
-//#region [ Item Hover ]
+//#region [ Item Hover and Click ]
 $(".work_item-thumb-embed").each(function (index) {
     $("video", this).get(0).pause();
 });
@@ -46,16 +46,16 @@ $(".work_item-wrapper").each(function (index) {
     });
 
     // Creates the timeline animation
-    let playerTimeLine = gsap.timeline({
+    let playerTimeline = gsap.timeline({
         paused: true,
     });
 
-    playerTimeLine.from($(this).find(".work_item-player-background"), {
+    playerTimeline.from($(this).find(".work_item-player-background"), {
         opacity: 0,
         duration: 0.5
     });
 
-    playerTimeLine.fromTo($(this).find(".div-aspect-16x9"), {
+    playerTimeline.fromTo($(this).find(".div-aspect-16x9"), {
         y: "10rem",
         opacity: 0
     }, {
@@ -65,7 +65,7 @@ $(".work_item-wrapper").each(function (index) {
         ease: "power2.out"
     }, 0);
 
-    playerTimeLine.fromTo($(this).find(".work_item-player-title"), {
+    playerTimeline.fromTo($(this).find(".work_item-player-title"), {
         y: "10rem",
         opacity: 0
     }, {
@@ -75,7 +75,7 @@ $(".work_item-wrapper").each(function (index) {
         ease: "power2.out"
     }, 0.25);
 
-    playerTimeLine.fromTo($(workItemPlayerClose), {
+    playerTimeline.fromTo($(workItemPlayerClose), {
         opacity: 0,
     }, {
         opacity: 1,
@@ -107,7 +107,7 @@ $(".work_item-wrapper").each(function (index) {
             $(".work_item-player-wrapper").css("padding-top", "14vw");
         }
         $(workItemPlayerComponent).css("display", "flex");
-        playerTimeLine.play();
+        playerTimeline.play();
         setTimeout(() => {
             workItemVideoPlayer.play();
         }, 500);
@@ -116,7 +116,7 @@ $(".work_item-wrapper").each(function (index) {
     // Sets what happen when the player close button clicked
     $(workItemPlayerClose).on("click", function () {
         // console.log("Close player");
-        playerTimeLine.reverse();
+        playerTimeline.reverse();
         workItemVideoPlayer.pause();
         setTimeout(() => {
             workItemVideoPlayer.stop();

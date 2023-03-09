@@ -5,6 +5,7 @@ let directorsTemplateIntroTimeline = gsap.timeline({
 
 // Disables page events at first
 $(".content-wrapper").css("pointer-events", "none");
+$(".content-wrapper").css("opacity", "1");
 
 // Configurates the timeline
 directorsTemplateIntroTimeline.fromTo(".director-works_collection", {
@@ -19,4 +20,5 @@ directorsTemplateIntroTimeline.fromTo(".director-works_collection", {
 
 function enablePageEvents() {
     $(".content-wrapper").css("pointer-events", "auto");
+    document.getElementById("director-works-collection").removeAttribute("style");
 }
