@@ -16,8 +16,20 @@ Webflow.push(function () {
     });
 
     $("[letters-fade-in]").each(function (index) {
-        let tl = gsap.timeline({ paused: false, onComplete: () => playVideo() });
-        tl.from($(this).find(".char"), { opacity: 0, duration: 0.2, delay: 0.2, ease: "power1.out", stagger: { from: headingFadeInFrom, amount: headingFadeInTime } });
+        let tl = gsap.timeline({
+            paused: false,
+            onComplete: () => playVideo()
+        });
+        tl.from($(this).find(".char"), {
+            opacity: 0,
+            duration: 0.2,
+            delay: 0.2,
+            ease: "power1.out",
+            stagger: {
+                from: headingFadeInFrom,
+                amount: headingFadeInTime
+            }
+        });
     });
 
     // Avoid flash of unstyled content
@@ -35,7 +47,13 @@ Webflow.push(function () {
         let myVideo = $(backgroundVid.get(0)).find('video');
         myVideo.get(0).play();
         myVideo.prop('muted', true);
-        gsap.to($(".home-hero_background-video"), { opacity: 1, duration: backgroundVideoFadeInTime });
-        gsap.to($(".navbar_menu-layout"), { opacity: 1, duration: navbarFadeInTime });
+        gsap.to($(".home-hero_background-video"), { 
+            opacity: 1, 
+            duration: backgroundVideoFadeInTime 
+        });
+        gsap.to($(".navbar_menu-layout"), { 
+            opacity: 1, 
+            duration: navbarFadeInTime 
+        });
     }
 });

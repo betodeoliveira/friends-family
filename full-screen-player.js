@@ -1,13 +1,15 @@
+let playerInitialNavbarFontSize = $(".navbar_menu-link").css("font-size");
+
 $(".full-screen-player_component").each(function (index) {
-    let playerShow = $(this).find("[full-screen-player]");
+    let playerComponent = $(this);
+    let playerShow = $(this).parents("[full-screen-player-show]");
     let playerBackground = $(this).find(".full-screen-player_background");
     let playerAspect = $(this).find(".div-aspect-16x9.is-player");
-    let playerTitle = $(this).find(".director-work_player-title");
+    let playerTitle = $(this).find(".full-screen-player_title");
     let playerClose = $(this).find(".full-screen-player_close");
-    let playerVideo = new Plyr($(this).find(".plyr_video")[0], {
-        controls: ["play", "progress", "current-time", "mute", "fullscreen"],
-        volume: 1,
-        resetOnEnd: true
+    let playerVideo = new Plyr($(this).find(".plyr_video"), {
+        controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
+        resetOnEnd: false
     });
     let playerTimeline = gsap.timeline({
         paused: true,
@@ -46,30 +48,36 @@ $(".full-screen-player_component").each(function (index) {
     }, 0.25);
 
     // Sets what happens when the player button is clicked
-    $(playerShow).on("click", function () {
-        console.log("Open player");
-        let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
-        if (initialNavbarFontSize != currentNavbarFontSize) {
-            $(".full-screen-player_wrapper").css("padding-top", "8vw");
+    $(playerShow).click(function () {
+        if($(playerComponent).css("display") == "none") {
+            // console.log("Open player");
+            let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
+            if (playerInitialNavbarFontSize != currentNavbarFontSize) {
+                $(".full-screen-player_wrapper").css("padding-top", "8vw");
+            }
+            else {
+                $(".full-screen-player_wrapper").css("padding-top", "14vw");
+            }
+            $(playerComponent).css("display", "flex");
+            playerTimeline.play();
+            setTimeout(() => {
+                playerVideo.muted = false;
+                playerVideo.volume = 1;
+                playerVideo.play();
+            }, 500);
         }
-        else {
-            $(".full-screen-player_wrapper").css("padding-top", "14vw");
-        }
-        $(this).css("display", "flex");
-        playerTimeline.play();
-        setTimeout(() => {
-            playerVideo.play();
-        }, 500);
-    });
+    })
 
     // Sets what happens when the close button is clicked
-    $(playerClose).on("click", function () {
-        console.log("Close player");
+    $(playerClose).click(function (e) {
+        // console.log("Close player");
+        // Prevent the click from going to other elements and triggering the open again
+        e.stopPropagation();
         playerTimeline.reverse();
         playerVideo.pause();
         setTimeout(() => {
             playerVideo.stop();
-            $(this).css("display", "none");
+            $(playerComponent).css("display", "none");
         }, 1000);
-    });
+    })
 });
