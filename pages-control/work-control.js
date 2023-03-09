@@ -58,10 +58,10 @@ $(".works_item-wrapper").each(function (index) {
         thumbTimeline.reverse();
         thumbPlayer.pause();
     });
-});
 
-function hideThumbComponent() {
-    $(thumbComponent).css("display", "none");
-    thumbPlayer.stop();
-}
+    function hideThumbComponent() {
+        $(thumbComponent).css("display", "none");
+        thumbPlayer.stop();
+    }
+});
 //#endregion
