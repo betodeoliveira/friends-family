@@ -46,9 +46,9 @@ $(".works_item-wrapper").each(function (index) {
     $(workItemButton).on("mouseenter", function () {
         if ($(thumbComponent).css("display") == "none") {
             $(thumbComponent).css("display", "block");
-            workItemThumbPlayer.volume = 0;
-            workItemThumbPlayer.muted = true;
-            workItemThumbPlayer.play();
+            thumbPlayer.volume = 0;
+            thumbPlayer.muted = true;
+            thumbPlayer.play();
             thumbTimeline.play();
         };
     });
@@ -56,12 +56,12 @@ $(".works_item-wrapper").each(function (index) {
     // Hides animated thumb on leave
     $(workItemButton).on("mouseleave", function () {
         thumbTimeline.reverse();
-        workItemThumbPlayer.pause();
+        thumbPlayer.pause();
     });
 });
 
 function hideThumbComponent() {
     $(thumbComponent).css("display", "none");
-    workItemThumbPlayer.stop();
+    thumbPlayer.stop();
 }
 //#endregion
