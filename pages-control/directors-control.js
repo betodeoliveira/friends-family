@@ -18,18 +18,35 @@ $(".director_item-wrapper").each(function (index) {
         });
     });
 
+    let thumbTimeline = gsap.timeline({
+        paused: true,
+        onReverseComplete: hideThumbWrapper
+    });
+
+    thumbTimeline.from(thumbWrapper, {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power1.out"
+    });
+
     // Shows animated thumb on hover
     $(directorButton).on("mouseenter", function () {
-        $(thumbWrapper).css("opacity", "1");
+        $(thumbWrapper).css("display", "block");
+        thumbTimeline.play();
         thumbPlayer.volume = 0;
         thumbPlayer.muted = true;
         thumbPlayer.play();
     });
 
     $(directorButton).on("mouseleave", function () {
-        $(thumbWrapper).css("opacity", "0");
-        thumbPlayer.stop();
+        thumbTimeline.reverse();
+        thumbPlayer.pause();
     });
+
+    function hideThumbWrapper() {
+        $(thumbWrapper).css("display", "none");
+        thumbPlayer.stop();
+    }
 });
 //#endregion
 
