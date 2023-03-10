@@ -8,7 +8,7 @@ $(".fullscreen-player_component").each(function (index) {
     let playerAspect = $(this).find(".div-aspect-16x9.is-player");
     let playerTitle = $(this).find(".fullscreen-player_title");
     let playerClose = $(this).find(".fullscreen-player_close");
-    let playerVideo = new Plyr($(this).find(".plyr_video"), {
+    let playerVideo = Plyr.setup($(this).find(".plyr_video"), {
         controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
         resetOnEnd: false
     });

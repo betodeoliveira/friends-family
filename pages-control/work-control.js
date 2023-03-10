@@ -26,7 +26,7 @@ $(".works_item-title-wrapper").each(function (index) {
 $(".works_item-wrapper").each(function (index) {
     let workItemTitleWrapper = $(this).find(".works_item-title-wrapper");
     let thumbComponent = $(this).find(".works_item-thumb-component");
-    let thumbPlayer = new Plyr($(this).find(".plyr_thumb")[0], {
+    let thumbPlayer = Plyr.setup($(this).find(".plyr_thumb")[0], {
         controls: [],
         resetOnEnd: true
     });
