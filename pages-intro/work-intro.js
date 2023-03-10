@@ -21,6 +21,7 @@ workIntroTimeline.fromTo(".content-wrapper", {
 function enablePageEvents() {
     $(".content-wrapper").css("pointer-events", "auto");
     $(".content-wrapper").removeClass("second");
-    // GSAP add some styles that must be removed to the thumb player and video player work as expected
+    $(".content-wrapper").css("opacity", "1");
+    // GSAP add some styles that must be removed to the thumb and video player work as expected
     $(".content-wrapper").removeAttr("style");
 }
