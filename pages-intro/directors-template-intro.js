@@ -20,5 +20,6 @@ directorsTemplateIntroTimeline.fromTo(".director-works_collection", {
 
 function enablePageEvents() {
     $(".content-wrapper").css("pointer-events", "auto");
+    // GSAP add some styles that must be removed to the thumb player and video player work as expected
     document.getElementById("director-works-collection").removeAttribute("style");
 }
