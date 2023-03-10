@@ -1,6 +1,11 @@
 let playerInitialNavbarFontSize = $(".navbar_menu-link").css("font-size");
 let navbarBackground = $(".navbar_background-color");
 
+let fullscreenPlayers = Plyr.setup($(".plyr_video"), {
+    controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
+    resetOnEnd: false
+});
+
 $(".fullscreen-player_component").each(function (index) {
     let playerComponent = $(this);
     let playerShow = $(this).parents("[fullscreen-player-show]");
@@ -8,10 +13,7 @@ $(".fullscreen-player_component").each(function (index) {
     let playerAspect = $(this).find(".div-aspect-16x9.is-player");
     let playerTitle = $(this).find(".fullscreen-player_title");
     let playerClose = $(this).find(".fullscreen-player_close");
-    let playerVideo = Plyr.setup($(this).find(".plyr_video"), {
-        controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
-        resetOnEnd: false
-    });
+    let playerVideo = $(fullscreenPlayers[index])[0];
     let playerTimeline = gsap.timeline({
         paused: true,
     });
