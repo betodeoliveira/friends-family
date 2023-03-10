@@ -52,10 +52,10 @@ $(".fullscreen-player_component").each(function (index) {
         if($(playerComponent).css("display") == "none") {
             let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
             if (playerInitialNavbarFontSize != currentNavbarFontSize) {
-                $(".fullscreen-player_wrapper").css("padding-top", "8vw");
+                $(".fullscreen-player_wrapper").css("padding-top", "12vw");
             }
             else {
-                $(".fullscreen-player_wrapper").css("padding-top", "14vw");
+                $(".fullscreen-player_wrapper").css("padding-top", "18vw");
             }
             $(playerComponent).css("display", "flex");
             playerTimeline.play();

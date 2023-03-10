@@ -6,7 +6,9 @@ var Webflow = Webflow || [];
 Webflow.push(function () {
     let headingFadeInFrom = "start";
     let headingFadeInTime = 1.6;
+    let backgroundDelay = 0.5;
     let backgroundVideoFadeInTime = 1.0;
+    let navbarDelay = 0.5;
     let navbarFadeInTime = 1.0;
 
     // Split text into spans
@@ -49,11 +51,13 @@ Webflow.push(function () {
         myVideo.prop('muted', true);
         gsap.to($(".home-hero_background-video"), { 
             opacity: 1, 
-            duration: backgroundVideoFadeInTime 
+            duration: backgroundVideoFadeInTime ,
+            delay: backgroundDelay
         });
         gsap.to($(".navbar_menu-layout"), { 
             opacity: 1, 
-            duration: navbarFadeInTime 
+            duration: navbarFadeInTime,
+            delay: navbarDelay
         });
     }
 });
