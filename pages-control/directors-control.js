@@ -5,20 +5,19 @@ let thumbPlayers = Plyr.setup((".plyr_thumb"), {
     resetOnEnd: true
 });
 
-$(".director_item-wrapper").each(function (itemIndex) {
+$(".director_item-wrapper").each(function (index) {
 
     let directorButton = $(this).find(".director_item-button");
     let directorSlug = $(this).find(".director_item-slug").attr("director-slug");
     let thumbSlug;
     let thumbWrapper;
-    let thumbPlayer;
+    let thumbPlayer = $(thumbPlayers[index])[0];
 
     $(directorButton).each(function (buttonIndex) {
         // console.log("slug to find: " + directorSlug);
         thumbSlug = $(".directors-thumb_list").find("[director-slug='" + directorSlug + "']");
         // console.log("element with slug: " + $(thumbSlug).attr("director-slug"));
         thumbWrapper = $(thumbSlug).parents(".directors-thumb_item-wrapper");
-        thumbPlayer = $(thumbPlayers[buttonIndex])[0];
     }); 
 
     let thumbTimeline = gsap.timeline({
