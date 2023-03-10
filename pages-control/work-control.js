@@ -23,13 +23,19 @@ $(".works_item-title-wrapper").each(function (index) {
 //#endregion
 
 //#region [ Item Hover ]
+let thumbPlayers = Plyr.setup($(this).find(".plyr_thumb")[0], {
+    controls: [],
+    resetOnEnd: true
+});
+
 $(".works_item-wrapper").each(function (index) {
     let workItemTitleWrapper = $(this).find(".works_item-title-wrapper");
     let thumbComponent = $(this).find(".works_item-thumb-component");
-    let thumbPlayer = Plyr.setup($(this).find(".plyr_thumb")[0], {
-        controls: [],
-        resetOnEnd: true
-    });
+    // let thumbPlayer = Plyr.setup($(this).find(".plyr_thumb")[0], {
+    //     controls: [],
+    //     resetOnEnd: true
+    // });
+    let thumbPlayer = $(thumbPlayers).eq(index);
 
     let thumbTimeline = gsap.timeline({
         paused: true,
