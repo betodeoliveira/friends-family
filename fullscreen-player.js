@@ -1,4 +1,5 @@
 let playerInitialNavbarFontSize = $(".navbar_menu-link").css("font-size");
+let navbarBackground = $(".navbar_background-color");
 
 $(".fullscreen-player_component").each(function (index) {
     let playerComponent = $(this);
@@ -15,10 +16,15 @@ $(".fullscreen-player_component").each(function (index) {
         paused: true,
     });
 
-    playerTimeline.from(playerBackground, {
+    playerTimeline.to(navbarBackground, {
         opacity: 0,
         duration: 0.5
     });
+
+    playerTimeline.from(playerBackground, {
+        opacity: 0,
+        duration: 0.5
+    }, 0);
 
     playerTimeline.fromTo(playerAspect, {
         y: "10rem",
