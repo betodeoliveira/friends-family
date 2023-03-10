@@ -19,7 +19,7 @@ $(".director_item-wrapper").each(function (itemIndex) {
         // console.log("element with slug: " + $(thumbSlug).attr("director-slug"));
         thumbWrapper = $(thumbSlug).parents(".directors-thumb_item-wrapper");
         thumbPlayer = $(thumbPlayers[buttonIndex])[0];
-    });
+    }); 
 
     let thumbTimeline = gsap.timeline({
         paused: true,
