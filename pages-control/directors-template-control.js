@@ -20,7 +20,8 @@ $(".director-work_wrapper").each(function (index) {
     let thumbPlayer = $(thumbPlayers[index])[0];
 
     let directorWorkTimeline = gsap.timeline({
-        paused: true
+        paused: true,
+        onReverseComplete: hideThumbComponent
     });
 
     directorWorkTimeline.to(thumbWrapper, {
@@ -54,11 +55,16 @@ $(".director-work_wrapper").each(function (index) {
 
     $(directorWorkButton).on("mouseleave", function () {
         directorWorkTimeline.reverse();
-        setTimeout(() => {
-            $(titleWrapper).css("display", "none");
-            thumbPlayer.stop();
-        }, 800);
     });
+
+    $(directorWorkButton).on("click", function () {
+        directorWorkTimeline.reverse();
+    });
+
+    function hideThumbComponent() {
+        $(titleWrapper).css("display", "none");
+        thumbPlayer.stop();
+    }
 });
 
 //#region [ About ]
