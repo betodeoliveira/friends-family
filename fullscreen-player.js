@@ -3,6 +3,7 @@ let navbarBackground = $(".navbar_background-color");
 
 let fullscreenPlayers = Plyr.setup((".plyr_video"), {
     controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
+    blankVideo: "https://cdn.plyr.io/static/blank.mp4",
     resetOnEnd: false
 });
 

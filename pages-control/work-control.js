@@ -25,6 +25,7 @@ $(".works_item-title-wrapper").each(function (index) {
 //#region [ Item Hover ]
 let thumbPlayers = Plyr.setup((".plyr_thumb"), {
     controls: [],
+    blankVideo: "https://cdn.plyr.io/static/blank.mp4",
     resetOnEnd: true
 });
 
