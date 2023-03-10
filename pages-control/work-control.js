@@ -40,7 +40,7 @@ $(".works_item-wrapper").each(function (index) {
         opacity: 0,
         duration: 0.5,
         ease: "power1.out"
-    })
+    });
 
     // The hover most be done here because if we do on the works_item-wrapper the mouse leave will just play when the mouse leaves the screen
     $(workItemTitleWrapper).on("mouseenter", function () {

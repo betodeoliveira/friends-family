@@ -14,7 +14,6 @@ $(".director_item-wrapper").each(function (index) {
         thumbWrapper = $(thumbSlug).parents(".directors-thumb_item-wrapper");
         thumbPlayer = new Plyr($(thumbWrapper).find(".plyr_thumb")[0], {
             controls: [],
-            volume: 0,
             resetOnEnd: true
         });
     });
@@ -22,6 +21,8 @@ $(".director_item-wrapper").each(function (index) {
     // Shows animated thumb on hover
     $(directorButton).on("mouseenter", function () {
         $(thumbWrapper).css("opacity", "1");
+        thumbPlayer.volume = 0;
+        thumbPlayer.muted = true;
         thumbPlayer.play();
     });
 
