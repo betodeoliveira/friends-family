@@ -2,6 +2,7 @@
 var Webflow = Webflow || [];
 Webflow.push(function () {
     $("#nav-link-directors").addClass("w--current");
+    $("#nav-link-directors").css("pointer-events", "none");
 });
 
 $(".director-work_wrapper").each(function (index) {
