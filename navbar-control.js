@@ -28,14 +28,14 @@ navbarTransitionTimeline = gsap.timeline({
 navbarShrinkTimeline.to(".navbar_menu-link", {
     fontSize: shrinkFontSize,
     duration: 0.5,
-    ease: "power2.out"
+    ease: "power1.out"
 });
 
 // Configurates the background timeline
 navbarBackgroundTimeline.to(".navbar_background-color", {
     opacity: 1,
     duration: 0.5,
-    ease: "power2.out"
+    ease: "power1.out"
 }, 0);
 
 // Creates the scroll trigger
