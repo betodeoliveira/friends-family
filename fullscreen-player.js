@@ -1,7 +1,7 @@
 let playerInitialNavbarFontSize = $(".navbar_menu-link").css("font-size");
 let navbarBackground = $(".navbar_background-color");
 
-let fullscreenPlayers = Plyr.setup($(".plyr_video"), {
+let fullscreenPlayers = Plyr.setup((".plyr_video"), {
     controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
     resetOnEnd: false
 });
