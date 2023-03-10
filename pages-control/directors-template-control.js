@@ -5,16 +5,19 @@ Webflow.push(function () {
     $("#nav-link-directors").css("pointer-events", "none");
 });
 
+let thumbPlayers = Plyr.setup((".plyr_thumb"), {
+    controls: [],
+    blankVideo: "https://cdn.plyr.io/static/blank.mp4",
+    resetOnEnd: true
+});
+
 $(".director-work_wrapper").each(function (index) {
     let directorWorkButton = $(this).find(".director-work_button");
     let titleWrapper = $(this).find(".director-work_title-wrapper");
     let mainTitle = $(this).find(".director-work_main-title");
     let secondTitle = $(this).find(".director-work_second-title");
     let thumbWrapper = $(this).find(".director-work_thumb-wrapper");
-    let thumbPlayer = new Plyr($(thumbWrapper).find(".plyr_thumb")[0], {
-        controls: [],
-        resetOnEnd: true
-    });
+    let thumbPlayer = $(thumbPlayers[index])[0];
 
     let directorWorkTimeline = gsap.timeline({
         paused: true

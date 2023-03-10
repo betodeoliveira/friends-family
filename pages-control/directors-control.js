@@ -1,4 +1,10 @@
 //#region [ Item Hover ]
+let thumbPlayers = Plyr.setup((".plyr_thumb"), {
+    controls: [],
+    blankVideo: "https://cdn.plyr.io/static/blank.mp4",
+    resetOnEnd: true
+});
+
 $(".director_item-wrapper").each(function (index) {
 
     let directorButton = $(this).find(".director_item-button");
@@ -12,10 +18,7 @@ $(".director_item-wrapper").each(function (index) {
         thumbSlug = $(".directors-thumb_list").find("[director-slug='" + directorSlug + "']");
         // console.log("element with slug: " + $(thumbSlug).attr("director-slug"));
         thumbWrapper = $(thumbSlug).parents(".directors-thumb_item-wrapper");
-        thumbPlayer = new Plyr($(thumbWrapper).find(".plyr_thumb")[0], {
-            controls: [],
-            resetOnEnd: true
-        });
+        thumbPlayer = $(thumbPlayers[index])[0];
     });
 
     let thumbTimeline = gsap.timeline({
