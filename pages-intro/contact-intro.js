@@ -19,8 +19,8 @@ $("[animate-scroll-in]").each(function (index) {
     // Creates the scroll trigger
     ScrollTrigger.create({
         trigger: $(this),
-        start: "top bottom-=20%",
-        end: "top bottom-=20%",
+        start: "top bottom-=5%",
+        end: "top bottom-=5%",
         markers: false,
         onEnter: () => {
             contactIntroTimeline.play();
