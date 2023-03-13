@@ -74,10 +74,9 @@ $(".fullscreen-player_component").each(function (index) {
                 var promise = playerVideo.play();
                 if (promise !== undefined) {
                     promise.catch(error => {
-                        // Auto-play was prevented
-                        // Show a UI element to let the user manually start playback
+                        console.log("Auto-play was prevented");
                     }).then(() => {
-                        // Auto-play started
+                        console.log("Auto-play started");
                     });
                 }
             }, 500);
