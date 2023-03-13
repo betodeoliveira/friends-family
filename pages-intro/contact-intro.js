@@ -7,7 +7,7 @@ $("[animate-scroll-in]").each(function (index) {
 
     // Configurates the timeline
     contactIntroTimeline.fromTo($(this), {
-        y: "-4rem",
+        y: "8rem",
         opacity: 0
     }, {
         y: "0rem",
