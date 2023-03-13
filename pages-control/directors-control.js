@@ -12,6 +12,7 @@ $(".director_item-wrapper").each(function (index) {
     let thumbSlug;
     let thumbWrapper;
     let thumbPlayer = $(thumbPlayers[index])[0];
+    thumbPlayer.stop();
 
     $(directorButton).each(function (buttonIndex) {
         // console.log("slug to find: " + directorSlug);
@@ -37,7 +38,14 @@ $(".director_item-wrapper").each(function (index) {
         thumbTimeline.play();
         thumbPlayer.volume = 0;
         thumbPlayer.muted = true;
-        thumbPlayer.play();
+        var promise = thumbPlayer.play();
+        if (promise !== undefined) {
+            promise.catch(error => {
+                // console.log("Auto-play was prevented");
+            }).then(() => {
+                // console.log("Auto-play started");
+            });
+        }
     });
 
     $(directorButton).on("mouseleave", function () {

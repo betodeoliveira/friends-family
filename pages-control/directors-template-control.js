@@ -18,6 +18,7 @@ $(".director-work_wrapper").each(function (index) {
     let secondTitle = $(this).find(".director-work_second-title");
     let thumbWrapper = $(this).find(".director-work_thumb-wrapper");
     let thumbPlayer = $(thumbPlayers[index])[0];
+    thumbPlayer.stop();
 
     let directorWorkTimeline = gsap.timeline({
         paused: true,
@@ -47,10 +48,17 @@ $(".director-work_wrapper").each(function (index) {
 
     $(directorWorkButton).on("mouseenter", function () {
         $(titleWrapper).css("display", "flex");
+        directorWorkTimeline.play();
         thumbPlayer.valume = 0;
         thumbPlayer.muted = true;
-        thumbPlayer.play();
-        directorWorkTimeline.play();
+        var promise = thumbPlayer.play();
+        if (promise !== undefined) {
+            promise.catch(error => {
+                // console.log("Auto-play was prevented");
+            }).then(() => {
+                // console.log("Auto-play started");
+            });
+        }
     });
 
     $(directorWorkButton).on("mouseleave", function () {
