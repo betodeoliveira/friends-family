@@ -15,6 +15,7 @@ $(".fullscreen-player_component").each(function (index) {
     let playerTitle = $(this).find(".fullscreen-player_title");
     let playerClose = $(this).find(".fullscreen-player_close");
     let playerVideo = $(fullscreenPlayers[index])[0];
+    playerVideo.stop();
     let playerTimeline = gsap.timeline({
         paused: true,
     });
@@ -74,9 +75,9 @@ $(".fullscreen-player_component").each(function (index) {
                 var promise = playerVideo.play();
                 if (promise !== undefined) {
                     promise.catch(error => {
-                        console.log("Auto-play was prevented");
+                        // console.log("Auto-play was prevented");
                     }).then(() => {
-                        console.log("Auto-play started");
+                        // console.log("Auto-play started");
                     });
                 }
             }, 500);

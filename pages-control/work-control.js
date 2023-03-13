@@ -56,9 +56,9 @@ $(".works_item-wrapper").each(function (index) {
             var promise = thumbPlayer.play();
             if (promise !== undefined) {
                 promise.catch(error => {
-                    console.log("Auto-play was prevented");
+                    // console.log("Auto-play was prevented");
                 }).then(() => {
-                    console.log("Auto-play started");
+                    // console.log("Auto-play started");
                 });
             }
         };
