@@ -39,43 +39,95 @@ navbarBackgroundTimeline.to(".navbar_background-color", {
 }, 0);
 
 // Creates the scroll trigger
-ScrollTrigger.create({
-    trigger: $(".navbar_trigger"),
-    start: "top top",
-    end: "top top",
-    markers: false,
-    onEnter: () => {
-        navbarShrinkTimeline.play();
-        navbarBackgroundTimeline.play();
-    },
-    onEnterBack: () => {
-        navbarShrinkTimeline.reverse();
-        navbarBackgroundTimeline.reverse();
+
+
+function checkBreakpoint(x) {
+    if (x.matches) {
+        // desktop code here
+        ScrollTrigger.create({
+            trigger: $(".navbar_trigger"),
+            start: "top top",
+            end: "top top",
+            markers: false,
+            onEnter: () => {
+                navbarShrinkTimeline.play();
+                navbarBackgroundTimeline.play();
+            },
+            onEnterBack: () => {
+                navbarShrinkTimeline.reverse();
+                navbarBackgroundTimeline.reverse();
+            }
+        });
+
+        // When a link is cliked play the transition
+        $(".navbar_menu-link:not(.w--current").on("click", function (e) {
+            // Configurates the transition timeline
+            navbarTransitionTimeline.to(".navbar_background-color", {
+                opacity: 0,
+                duration: 0,
+                ease: "power1.out"
+            });
+            navbarTransitionTimeline.to($(this), {
+                opacity: 0.5,
+                duration: 0.5,
+                ease: "power1.out"
+            }, 0);
+
+            // Removes the current state effect from the current link
+            navbarTransitionTimeline.to(".navbar_menu-link.w--current", {
+                opacity: 1,
+                duration: 0.5,
+                ease: "power1.out"
+            }, 0);
+
+            // Play the timelines
+            navbarTransitionTimeline.play();
+            navbarShrinkTimeline.reverse();
+        });
+    } else {
+        // tablet & below code here
+        ScrollTrigger.create({
+            trigger: $(".navbar_trigger"),
+            start: "top top",
+            end: "top top",
+            markers: false,
+            onEnter: () => {
+                // navbarShrinkTimeline.play();
+                navbarBackgroundTimeline.play();
+            },
+            onEnterBack: () => {
+                // navbarShrinkTimeline.reverse();
+                navbarBackgroundTimeline.reverse();
+            }
+        });
+
+        // When a link is cliked play the transition
+        $(".navbar_menu-link:not(.w--current").on("click", function (e) {
+            // Configurates the transition timeline
+            navbarTransitionTimeline.to(".navbar_background-color", {
+                opacity: 0,
+                duration: 0,
+                ease: "power1.out"
+            });
+            navbarTransitionTimeline.to($(this), {
+                opacity: 0.5,
+                duration: 0.5,
+                ease: "power1.out"
+            }, 0);
+
+            // Removes the current state effect from the current link
+            navbarTransitionTimeline.to(".navbar_menu-link.w--current", {
+                opacity: 1,
+                duration: 0.5,
+                ease: "power1.out"
+            }, 0);
+
+            // Play the timelines
+            navbarTransitionTimeline.play();
+            // navbarShrinkTimeline.reverse();
+        });
     }
-});
-
-// When a link is cliked play the transition
-$(".navbar_menu-link:not(.w--current").on("click", function (e) {
-    // Configurates the transition timeline
-    navbarTransitionTimeline.to(".navbar_background-color", {
-        opacity: 0,
-        duration: 0,
-        ease: "power1.out"
-    });
-    navbarTransitionTimeline.to($(this), {
-        opacity: 0.5,
-        duration: 0.5,
-        ease: "power1.out"
-    }, 0);
-
-    // Removes the current state effect from the current link
-    navbarTransitionTimeline.to(".navbar_menu-link.w--current", {
-        opacity: 1,
-        duration: 0.5,
-        ease: "power1.out"
-    }, 0);
-
-    // Play the timelines
-    navbarTransitionTimeline.play();
-    navbarShrinkTimeline.reverse();
-});
+}
+const matchMediaDesktop = window.matchMedia("(min-width: 992px)");
+checkBreakpoint(matchMediaDesktop);
+matchMediaDesktop.addListener(checkBreakpoint);
