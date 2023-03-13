@@ -33,6 +33,7 @@ $(".works_item-wrapper").each(function (index) {
     let workItemTitleWrapper = $(this).find(".works_item-title-wrapper");
     let thumbComponent = $(this).find(".works_item-thumb-component");
     let thumbPlayer = $(thumbPlayers[index])[0];
+    thumbPlayer.stop();
 
     let thumbTimeline = gsap.timeline({
         paused: true,
@@ -49,10 +50,17 @@ $(".works_item-wrapper").each(function (index) {
     $(workItemTitleWrapper).on("mouseenter", function () {
         if ($(thumbComponent).css("display") == "none") {
             $(thumbComponent).css("display", "block");
+            thumbTimeline.play();
             thumbPlayer.volume = 0;
             thumbPlayer.muted = true;
-            thumbPlayer.play();
-            thumbTimeline.play();
+            var promise = thumbPlayer.play();
+            if (promise !== undefined) {
+                promise.catch(error => {
+                    console.log("Auto-play was prevented");
+                }).then(() => {
+                    console.log("Auto-play started");
+                });
+            }
         };
     });
 
