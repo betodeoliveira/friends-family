@@ -7,10 +7,10 @@ $("[animate-scroll-in]").each(function (index) {
 
     // Configurates the timeline
     contactIntroTimeline.fromTo($(this).find(".contact_content"), {
-        y: "25vh",
+        y: "-4rem",
         opacity: 0
     }, {
-        y: "0vh",
+        y: "0rem",
         opacity: 1,
         duration: 0.5,
         ease: "power2.out"
@@ -20,7 +20,7 @@ $("[animate-scroll-in]").each(function (index) {
     ScrollTrigger.create({
         trigger: $(this),
         start: "top bottom-=20%",
-        end: "top bottom",
+        end: "top bottom-=20%",
         markers: false,
         onEnter: () => {
             contactIntroTimeline.play();
