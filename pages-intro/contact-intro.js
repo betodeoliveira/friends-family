@@ -6,7 +6,7 @@ $("[animate-scroll-in]").each(function (index) {
     });
 
     // Configurates the timeline
-    contactIntroTimeline.fromTo($(this).find(".contact_content"), {
+    contactIntroTimeline.fromTo($(this), {
         y: "-4rem",
         opacity: 0
     }, {
