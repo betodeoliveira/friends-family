@@ -7,7 +7,9 @@ $(".navbar_menu-link.w--current").on("click", function (e) {
 });
 
 // GSAP timeline variables
+let initialFontSize = $(".navbar_menu-link").css("font-size");
 let shrinkFontSize = "2vw";
+
 
 // Creates the shrink timeline
 let navbarShrinkTimeline = gsap.timeline({
@@ -44,6 +46,7 @@ navbarBackgroundTimeline.to(".navbar_background-color", {
 function checkBreakpoint(x) {
     if (x.matches) {
         // desktop code here
+        console.log("Is Desktop");
         ScrollTrigger.create({
             trigger: $(".navbar_trigger"),
             start: "top top",
@@ -86,6 +89,7 @@ function checkBreakpoint(x) {
         });
     } else {
         // tablet & below code here
+        console.log("Is Tablet");
         ScrollTrigger.create({
             trigger: $(".navbar_trigger"),
             start: "top top",
