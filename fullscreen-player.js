@@ -71,7 +71,15 @@ $(".fullscreen-player_component").each(function (index) {
             setTimeout(() => {
                 playerVideo.muted = false;
                 playerVideo.volume = 1;
-                playerVideo.play();
+                var promise = playerVideo.play();
+                if (promise !== undefined) {
+                    promise.catch(error => {
+                        // Auto-play was prevented
+                        // Show a UI element to let the user manually start playback
+                    }).then(() => {
+                        // Auto-play started
+                    });
+                }
             }, 500);
         }
     })
