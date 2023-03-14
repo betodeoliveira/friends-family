@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    let initialFontSize = $(".navbar_menu-link").css("font-size");
-    let shrinkFontSize;
+    let initialFontSize = "12vw";
+    let shrinkFontSize = "2vw";
 
     let matchMedia = gsap.matchMedia();
     // Desktop
