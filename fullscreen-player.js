@@ -89,14 +89,15 @@ $(document).ready(function () {
 
         // Sets what happens when the close button is clicked
         $(playerClose).click(function (e) {
+            console.log("Close player");
             playerTimeline.reverse();
             playerVideo.pause();
             setTimeout(() => {
                 playerVideo.stop();
                 $(playerComponent).css("display", "none");
             }, 1000);
-                        // Prevent the click from going to other elements and triggering the open again
-                        e.stopPropagation();
+            // Prevent the click from going to other elements and triggering the open again
+            e.stopPropagation();
         })
     });
 });
