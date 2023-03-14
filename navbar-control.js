@@ -1,25 +1,25 @@
 $(document).ready(function () {
-    let initialFontSize = "8.9vw";
+    let initialFontSize = "8.9vw"; // Make sure to validate on webflow
     let shrinkFontSize = "2vw";
+    let navbarIsSmall = false;
 
     let matchMedia = gsap.matchMedia();
+
     // Desktop
     matchMedia.add("(min-width: 992px)", () => {
         shrinkFontSize = "2vw";
+        if (navbarIsSmall) {
+            setNavbarFontSize(shrinkFontSize);
+        }
+        else {
+            setNavbarFontSize(initialFontSize);
+        }
     });
 
     // Tablet and below
     matchMedia.add("(max-width: 991px)", () => {
         shrinkFontSize = initialFontSize;
-        let currentFontSize = $(".navbar_menu-link").css("font-size");
-        if (initialFontSize != currentFontSize) {
-            // Font Size
-            gsap.to(".navbar_menu-link", {
-                fontSize: initialFontSize,
-                duration: 0.5,
-                ease: "power1.out"
-            });
-        }
+        setNavbarFontSize(initialFontSize);
     });
 
     // Sets the navbar background color
@@ -37,6 +37,7 @@ $(document).ready(function () {
         end: "top top",
         markers: false,
         onEnter: () => {
+            navbarIsSmall = true;
             // Background
             gsap.to(".navbar_background-color", {
                 opacity: 1,
@@ -44,13 +45,10 @@ $(document).ready(function () {
                 ease: "power1.out"
             });
             // Font Size
-            gsap.to(".navbar_menu-link", {
-                fontSize: shrinkFontSize,
-                duration: 0.5,
-                ease: "power1.out"
-            });
+            setNavbarFontSize(shrinkFontSize);
         },
         onEnterBack: () => {
+            navbarIsSmall = false;
             // Background
             gsap.to(".navbar_background-color", {
                 opacity: 0,
@@ -58,11 +56,7 @@ $(document).ready(function () {
                 ease: "power1.out"
             });
             // Font Size
-            gsap.to(".navbar_menu-link", {
-                fontSize: initialFontSize,
-                duration: 0.5,
-                ease: "power1.out"
-            });
+            setNavbarFontSize(initialFontSize);
         }
     });
 
@@ -88,13 +82,15 @@ $(document).ready(function () {
             duration: 0.5,
             ease: "power1.out"
         });
+        
+        setNavbarFontSize(initialFontSize);
+    });
 
-        // Font Size
+    function setNavbarFontSize(fontSize) {
         gsap.to(".navbar_menu-link", {
-            fontSize: initialFontSize,
+            fontSize: fontSize,
             duration: 0.5,
             ease: "power1.out"
         });
-        $(".navbar_menu-link").css("font-size", initialFontSize);
-    });
+    }
 });
