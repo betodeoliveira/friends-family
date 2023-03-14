@@ -54,7 +54,7 @@ $(document).ready(function () {
         // New link opacity
         setCustomElementOpacity($(this), 0.5);
         // Current link opacity
-        setCustomElementOpacity($(".navbar_menu-link.w--current"), 0.5);
+        setCustomElementOpacity($(".navbar_menu-link.w--current"), 1);
         setNavbarFontSize(bigFontSize);
     });
 
