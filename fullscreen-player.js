@@ -5,7 +5,7 @@ $(document).ready(function () {
     let fullscreenPlayers = Plyr.setup((".plyr_video"), {
         controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
         blankVideo: "https://cdn.plyr.io/static/blank.mp4",
-        fullscreen: { enabled: true, fallback: true, iosNative: false, container: null },
+        enabled: !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent),
         resetOnEnd: false
     });
 
