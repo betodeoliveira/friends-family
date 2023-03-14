@@ -12,7 +12,7 @@ $(document).ready(function () {
     matchMedia.add("(max-width: 991px)", () => {
         shrinkFontSize = initialFontSize;
         let currentFontSize = $(".navbar_menu-link").css("font-size");
-        if (initialFontSize != currentNavbarFontSize) {
+        if (initialFontSize != currentFontSize) {
             // Font Size
             gsap.to(".navbar_menu-link", {
                 fontSize: initialFontSize,
