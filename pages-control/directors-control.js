@@ -3,6 +3,7 @@ $(document).ready(function () {
     let matchMedia = gsap.matchMedia();
     // Desktop Match Media
     matchMedia.add("(min-width: 992px)", () => {
+        $(".directors-thumb_collection").css("display", "block");
         let thumbPlayers = Plyr.setup((".plyr_thumb"), {
             controls: [],
             blankVideo: "https://cdn.plyr.io/static/blank.mp4",
@@ -58,6 +59,11 @@ $(document).ready(function () {
                 $(thumbWrapper).css("display", "none");
                 thumbPlayer.stop();
             }
+        });
+
+        // Tablet and below Match Media
+        matchMedia.add("(max-width: 991px)", () => {
+            $(".directors-thumb_collection").css("display", "none");
         });
     });
     //#endregion
