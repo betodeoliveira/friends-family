@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let initialFontSize = "12vw";
+    let initialFontSize = "8.9vw";
     let shrinkFontSize = "2vw";
 
     let matchMedia = gsap.matchMedia();
