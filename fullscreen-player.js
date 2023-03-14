@@ -5,6 +5,7 @@ $(document).ready(function () {
     let fullscreenPlayers = Plyr.setup((".plyr_video"), {
         controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
         blankVideo: "https://cdn.plyr.io/static/blank.mp4",
+        fullscreen: { enabled: true, fallback: true, iosNative: false, container: null },
         resetOnEnd: false
     });
 
@@ -16,13 +17,7 @@ $(document).ready(function () {
         let playerTitle = $(this).find(".fullscreen-player_title");
         let playerClose = $(this).find(".fullscreen-player_close");
         let playerVideo = $(fullscreenPlayers[index])[0];
-        playerVideo.on('enterfullscreen', event => {
-            screen.orientation.lock('landscape');
-        });
-        
-        playerVideo.on('exitfullscreen', event => {
-            screen.orientation.lock('portrait');
-        });
+
         playerVideo.stop();
         let playerTimeline = gsap.timeline({
             paused: true,
