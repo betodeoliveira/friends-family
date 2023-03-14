@@ -1,25 +1,25 @@
 $(document).ready(function () {
-    let initialFontSize = "8.9vw"; // Make sure to validate on webflow
-    let shrinkFontSize = "2vw";
+    const bigFontSize = "8.9vw"; // Make sure to validate on webflow
+    const smallFontSize = "2vw";
+    let currentSmallFontSize = smallFontSize;
     let navbarIsSmall = false;
-
     let matchMedia = gsap.matchMedia();
 
-    // Desktop
+    // Desktop Match Media
     matchMedia.add("(min-width: 992px)", () => {
-        shrinkFontSize = "2vw";
+        currentSmallFontSize = smallFontSize;
         if (navbarIsSmall) {
-            setNavbarFontSize(shrinkFontSize);
+            setNavbarFontSize(currentSmallFontSize);
         }
         else {
-            setNavbarFontSize(initialFontSize);
+            setNavbarFontSize(bigFontSize);
         }
     });
 
-    // Tablet and below
+    // Tablet and below Match Media
     matchMedia.add("(max-width: 991px)", () => {
-        shrinkFontSize = initialFontSize;
-        setNavbarFontSize(initialFontSize);
+        currentSmallFontSize = bigFontSize;
+        setNavbarFontSize(bigFontSize);
     });
 
     // Sets the navbar background color
@@ -38,57 +38,45 @@ $(document).ready(function () {
         markers: false,
         onEnter: () => {
             navbarIsSmall = true;
-            // Background
-            gsap.to(".navbar_background-color", {
-                opacity: 1,
-                duration: 0.5,
-                ease: "power1.out"
-            });
-            // Font Size
-            setNavbarFontSize(shrinkFontSize);
+            setNavbarBackgroundOpacity(1);
+            setNavbarFontSize(currentSmallFontSize);
         },
         onEnterBack: () => {
             navbarIsSmall = false;
-            // Background
-            gsap.to(".navbar_background-color", {
-                opacity: 0,
-                duration: 0.5,
-                ease: "power1.out"
-            });
-            // Font Size
-            setNavbarFontSize(initialFontSize);
+            setNavbarBackgroundOpacity(0);
+            setNavbarFontSize(bigFontSize);
         }
     });
 
     // When a link is cliked play the transition
     $(".navbar_menu-link:not(.w--current").on("click", function (e) {
-        // Background
-        gsap.to(".navbar_background-color", {
-            opacity: 0,
-            duration: 0,
-            ease: "power1.out"
-        });
-
+        setNavbarBackgroundOpacity(0);
         // New link opacity
-        gsap.to($(this), {
-            opacity: 0.5,
-            duration: 0.5,
-            ease: "power1.out"
-        });
-
+        setCustomElementOpacity($(this), 0.5);
         // Current link opacity
-        gsap.to(".navbar_menu-link.w--current", {
-            opacity: 1,
-            duration: 0.5,
-            ease: "power1.out"
-        });
-        
-        setNavbarFontSize(initialFontSize);
+        setCustomElementOpacity($(".navbar_menu-link.w--current"), 0.5);
+        setNavbarFontSize(bigFontSize);
     });
 
     function setNavbarFontSize(fontSize) {
         gsap.to(".navbar_menu-link", {
             fontSize: fontSize,
+            duration: 0.5,
+            ease: "power1.out"
+        });
+    }
+
+    function setNavbarBackgroundOpacity(opacity) {
+        gsap.to(".navbar_background-color", {
+            opacity: opacity,
+            duration: 0.5,
+            ease: "power1.out"
+        });
+    }
+
+    function setCustomElementOpacity(element, opacity) {
+        gsap.to(element, {
+            opacity: opacity,
             duration: 0.5,
             ease: "power1.out"
         });
