@@ -14,11 +14,12 @@ $(document).ready(function () {
         let currentFontSize = $(".navbar_menu-link").css("font-size");
         if (initialFontSize != currentFontSize) {
             // Font Size
-            gsap.to(".navbar_menu-link", {
-                fontSize: initialFontSize,
-                duration: 0.5,
-                ease: "power1.out"
-            });
+            // gsap.to(".navbar_menu-link", {
+            //     fontSize: initialFontSize,
+            //     duration: 0.5,
+            //     ease: "power1.out"
+            // });
+            $(".navbar_menu-link").css("font-size", initialFontSize);
         }
     });
 
@@ -43,12 +44,13 @@ $(document).ready(function () {
                 duration: 0.5,
                 ease: "power1.out"
             });
-            // Font Size
-            gsap.to(".navbar_menu-link", {
-                fontSize: shrinkFontSize,
-                duration: 0.5,
-                ease: "power1.out"
-            });
+            // // Font Size
+            // gsap.to(".navbar_menu-link", {
+            //     fontSize: shrinkFontSize,
+            //     duration: 0.5,
+            //     ease: "power1.out"
+            // });
+            $(".navbar_menu-link").css("font-size", shrinkFontSize);
         },
         onEnterBack: () => {
             // Background
@@ -57,12 +59,13 @@ $(document).ready(function () {
                 duration: 0.5,
                 ease: "power1.out"
             });
-            // Font Size
-            gsap.to(".navbar_menu-link", {
-                fontSize: initialFontSize,
-                duration: 0.5,
-                ease: "power1.out"
-            });
+            // // Font Size
+            // gsap.to(".navbar_menu-link", {
+            //     fontSize: initialFontSize,
+            //     duration: 0.5,
+            //     ease: "power1.out"
+            // });
+            $(".navbar_menu-link").css("font-size", initialFontSize);
         }
     });
 
@@ -89,11 +92,12 @@ $(document).ready(function () {
             ease: "power1.out"
         });
 
-        // Font Size
-        gsap.to(".navbar_menu-link", {
-            fontSize: initialFontSize,
-            duration: 0.5,
-            ease: "power1.out"
-        });
+        // // Font Size
+        // gsap.to(".navbar_menu-link", {
+        //     fontSize: initialFontSize,
+        //     duration: 0.5,
+        //     ease: "power1.out"
+        // });
+        $(".navbar_menu-link").css("font-size", initialFontSize);
     });
 });
