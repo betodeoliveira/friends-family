@@ -1,6 +1,5 @@
 $(document).ready(function () {
     let initialFontSize = $(".navbar_menu-link").css("font-size");
-    let currentFontSize;
     let shrinkFontSize;
 
     let matchMedia = gsap.matchMedia();
@@ -12,6 +11,15 @@ $(document).ready(function () {
     // Tablet and below
     matchMedia.add("(max-width: 991px)", () => {
         shrinkFontSize = initialFontSize;
+        let currentFontSize = $(".navbar_menu-link").css("font-size");
+        if (initialFontSize != currentNavbarFontSize) {
+            // Font Size
+            gsap.to(".navbar_menu-link", {
+                fontSize: initialFontSize,
+                duration: 0.5,
+                ease: "power1.out"
+            });
+        }
     });
 
     // Sets the navbar background color
