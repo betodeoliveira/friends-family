@@ -35,7 +35,7 @@ $(document).ready(function () {
         });
 
         $(".works_item-wrapper").each(function (index) {
-            let workItemTitleWrapper = $(this).find(".works_item-title-wrapper");
+            let workItemTitleWrapper = $(this).find(".works_item-title-component");
             let thumbComponent = $(this).find(".works_item-thumb-component");
             let thumbPlayer = $(thumbPlayers[index])[0];
             thumbPlayer.stop();
