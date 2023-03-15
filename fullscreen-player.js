@@ -18,8 +18,8 @@ $(document).ready(function () {
         let playerVideo = $(fullscreenPlayers[index])[0];
         let playerTimeline = gsap.timeline({
             paused: true,
-            onComplete: setPlayerPlay,
-            onReverseComplete: setPlayerStop
+            onComplete: timelinePlayerPlay,
+            onReverseComplete: timelinePlayerStop
         });
 
         createPlayerTimeline($(this));
@@ -49,7 +49,7 @@ $(document).ready(function () {
             playerTimeline.reverse();
         });
 
-        function setPlayerPlay() {
+        function timelinePlayerPlay() {
             playerVideo.muted = false;
             playerVideo.volume = 1;
             let promise = playerVideo.play();
@@ -62,7 +62,7 @@ $(document).ready(function () {
             }
         }
 
-        function setPlayerStop() {
+        function timelinePlayerStop() {
             pauseVideo();
             playerVideo.restart();
             $(playerComponent).css("display", "none");
