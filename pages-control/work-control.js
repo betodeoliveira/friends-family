@@ -3,7 +3,7 @@ $(document).ready(function () {
     const viewportWidth = (coef) => window.innerWidth * (coef / 100);
 
     // Hides the work item when it reaches the top of the screen
-    $(".works_item-title-wrapper").each(function (index) {
+    $(".works_item-title-component").each(function (index) {
         ScrollTrigger.create({
             trigger: $(this),
             start: () => 'top ' + Math.min(viewportWidth(10)) + ' top',
