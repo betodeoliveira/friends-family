@@ -21,6 +21,8 @@ $(document).ready(function () {
     });
 
     function setIntroTimeline(staggerFrom) {
+        // Kills the old timeline
+        introTimeline.progress(0).kill();
         introTimeline.from($(".director_item-wrapper"), {
             opacity: 0,
             duration: 0.5,
