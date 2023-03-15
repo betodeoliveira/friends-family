@@ -1,8 +1,13 @@
 $(document).ready(function () {
     //#region [ Item Hover ]
     let matchMedia = gsap.matchMedia();
+    let reloadPage = false; // This is important because each time it reaches the desktop breakpint new timelines and varibales will be created
+    
     // Desktop Match Media
     matchMedia.add("(min-width: 992px)", () => {
+        if(reloadPage) {
+            window.location.reload();
+        }
         $(".directors-thumb_collection").css("display", "block");
         let thumbPlayers = Plyr.setup((".plyr_thumb"), {
             controls: [],
@@ -64,6 +69,8 @@ $(document).ready(function () {
         // Tablet and below Match Media
         matchMedia.add("(max-width: 991px)", () => {
             $(".directors-thumb_collection").css("display", "none");
+            $(".directors-thumb_collection").css("opacity", "0");
+            reloadPage = true;
         });
     });
     //#endregion

@@ -25,9 +25,13 @@ $(document).ready(function () {
 
     //#region [ Item Hover ]
     let matchMedia = gsap.matchMedia();
+    let reloadPage = false; // This is important because each time it reaches the desktop breakpint new timelines and varibales will be created
 
     // Desktop Match Media
     matchMedia.add("(min-width: 992px)", () => {
+        if(reloadPage) {
+            window.location.reload();
+        }
         let thumbPlayers = Plyr.setup((".plyr_thumb"), {
             controls: [],
             blankVideo: "https://cdn.plyr.io/static/blank.mp4",
@@ -39,7 +43,6 @@ $(document).ready(function () {
             let thumbComponent = $(this).find(".works_item-thumb-component");
             let thumbPlayer = $(thumbPlayers[index])[0];
             thumbPlayer.stop();
-
             let thumbTimeline = gsap.timeline({
                 paused: true,
                 onReverseComplete: hideThumbComponent
@@ -85,6 +88,8 @@ $(document).ready(function () {
     // Tablet and below Match Media
     matchMedia.add("(max-width: 991px)", () => {
         $(".works_item-thumb-component").css("display", "none");
+        $(".works_item-thumb-component").css("opacity", "0");
+        reloadPage = true;     
     });
     //#endregion
 });
