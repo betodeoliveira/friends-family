@@ -2,7 +2,7 @@
 var Webflow = Webflow || [];
 Webflow.push(function () {
     $("#nav-link-directors").addClass("w--current");
-    $("#nav-link-directors").css("pointer-events", "none");
+    // $("#nav-link-directors").css("pointer-events", "none");
 });
 
 let thumbPlayers = Plyr.setup((".plyr_thumb"), {
@@ -122,13 +122,6 @@ aboutTimeline.fromTo(aboutClose, {
 
 $(".director-about-button").click(function () {
     if ($(aboutComponent).css("display") == "none") {
-        // let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
-        // if (aboutInitialNavbarFontSize != currentNavbarFontSize) {
-            // $(aboutComponent).css("padding-top", "8vw");
-        // }
-        // else {
-            // $(aboutComponent).css("padding-top", "14vw");
-        // }
         $(aboutComponent).css("display", "flex");
         aboutTimeline.play();
     }
