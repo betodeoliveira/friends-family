@@ -2,7 +2,7 @@ $(document).ready(function () {
     let matchMedia = gsap.matchMedia();
 
     let introTimeline = gsap.timeline({
-        paused: false,
+        paused: true,
         onComplete: enablePageEvents
     });
 
@@ -27,6 +27,8 @@ $(document).ready(function () {
             ease: "power1.out",
             stagger: { amount: 1, from: staggerFrom }
         });
+
+        introTimeline.play();
     }
 
     function enablePageEvents() {
