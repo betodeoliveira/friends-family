@@ -1,26 +1,28 @@
 $(document).ready(function () {
     //#region [ Item Scroll ]
     const viewportWidth = (coef) => window.innerWidth * (coef / 100);
-
-    // Hides the work item when it reaches the top of the screen
-    $(".works_item-title-component").each(function (index) {
-        ScrollTrigger.create({
-            trigger: $(this),
-            start: () => 'top ' + Math.min(viewportWidth(10)) + ' top',
-            end: () => 'top ' + Math.min(viewportWidth(10)) + ' top',
-            // markers: true,
-            onEnter: () => {
-                gsap.to($(this), { x: "-4rem", ease: "power2.out", duration: 0.5 });
-                gsap.to($(this), { opacity: 0, duration: 0.25 });
-                gsap.set((this), { pointerEvents: "none" });
-            },
-            onEnterBack: () => {
-                gsap.to($(this), { x: "0rem", ease: "power2.out", duration: 0.5 });
-                gsap.to($(this), { opacity: 1, duration: 0.5 });
-                gsap.set((this), { pointerEvents: "auto" });
-            }
+    // Waits the intro to play
+    setTimeout(() => {
+        // Hides the work item when it reaches the top of the screen
+        $(".works_item").each(function (index) {
+            ScrollTrigger.create({
+                trigger: $(this),
+                start: () => 'top ' + Math.min(viewportWidth(12)),
+                end: () => 'top ' + Math.min(viewportWidth(12)),
+                // markers: true,
+                onEnter: () => {
+                    gsap.to($(this), { x: "-4rem", ease: "power2.out", duration: 0.5 });
+                    gsap.to($(this), { opacity: 0, duration: 0.25 });
+                    gsap.set((this), { pointerEvents: "none" });
+                },
+                onEnterBack: () => {
+                    gsap.to($(this), { x: "0rem", ease: "power2.out", duration: 0.5 });
+                    gsap.to($(this), { opacity: 1, duration: 0.5 });
+                    gsap.set((this), { pointerEvents: "auto" });
+                }
+            });
         });
-    });
+    }, 510);
     //#endregion
 
     //#region [ Item Hover ]
