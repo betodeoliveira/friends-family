@@ -17,16 +17,10 @@ $(document).ready(function () {
 
         $(".director_item-wrapper").each(function (index) {
             let directorButton = $(this).find(".director_item-button");
-            let directorSlug = $(this).find(".director_item-slug").attr("director-slug");
-            let thumbSlug;
-            let thumbWrapper;
+            let directorSlug = $(directorButton).attr("director-slug");
+            let thumbWrapper = $(".directors-thumb_list").find("[director-slug='" + directorSlug + "']");
             let thumbPlayer = $(thumbPlayers[index])[0];
             thumbPlayer.stop();
-
-            $(directorButton).each(function (buttonIndex) {
-                thumbSlug = $(".directors-thumb_list").find("[director-slug='" + directorSlug + "']");
-                thumbWrapper = $(thumbSlug).parents(".directors-thumb_item-wrapper");
-            });
 
             let thumbTimeline = gsap.timeline({
                 paused: true,
@@ -48,9 +42,9 @@ $(document).ready(function () {
                 var promise = thumbPlayer.play();
                 if (promise !== undefined) {
                     promise.catch(error => {
-                        // console.log("Auto-play was prevented");
+                        console.log("Auto-play was prevented");
                     }).then(() => {
-                        // console.log("Auto-play started");
+                        console.log("Auto-play started");
                     });
                 }
             });
