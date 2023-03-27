@@ -13,17 +13,21 @@ $(document).ready(function () {
                 onEnter: () => {
                     gsap.to($(this), { x: "-4rem", ease: "power2.out", duration: 0.5 });
                     gsap.to($(this), { opacity: 0, duration: 0.25 });
-                    gsap.set((this), { pointerEvents: "none" });
+                    $(this).parent(".works_item-wrapper").css("pointerEvents", "none");
                 },
                 onEnterBack: () => {
                     gsap.to($(this), { x: "0rem", ease: "power2.out", duration: 0.5 });
                     gsap.to($(this), { opacity: 1, duration: 0.5 });
-                    gsap.set((this), { pointerEvents: "auto" });
+                    $(this).parent(".works_item-wrapper").css("pointerEvents", "auto");
                 }
             });
         });
     }, 510);
     //#endregion
+
+    $(window).on('scroll', function() {
+        $(".div-block").css("opacity", 1);
+      });
 
     //#region [ Item Hover ]
     let matchMedia = gsap.matchMedia();
@@ -31,7 +35,7 @@ $(document).ready(function () {
 
     // Desktop Match Media
     matchMedia.add("(min-width: 992px)", () => {
-        if(reloadPage) {
+        if (reloadPage) {
             window.location.reload();
         }
         let thumbPlayers = Plyr.setup((".plyr_thumb"), {
@@ -58,6 +62,7 @@ $(document).ready(function () {
 
             // The hover most be done here because if we do on the works_item-wrapper the mouse leave will just play when the mouse leaves the screen
             $(workItemTitleWrapper).on("mouseenter", function () {
+                $(".div-block").css("opacity", 0);
                 if ($(thumbComponent).css("display") == "none") {
                     $(thumbComponent).css("display", "block");
                     thumbTimeline.play();
@@ -91,7 +96,7 @@ $(document).ready(function () {
     matchMedia.add("(max-width: 991px)", () => {
         $(".works_item-thumb-component").css("display", "none");
         $(".works_item-thumb-component").css("opacity", "0");
-        reloadPage = true;     
+        reloadPage = true;
     });
     //#endregion
 });
