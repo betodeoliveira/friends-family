@@ -55,9 +55,9 @@ $(document).ready(function () {
             let promise = playerVideo.play();
             if (promise !== undefined) {
                 promise.catch(error => {
-                    // console.log("Auto-play was prevented");
+                    // console.log("Fullscreen player Auto-play was prevented");
                 }).then(() => {
-                    // console.log("Auto-play started");
+                    // console.log("Fullscreen player Auto-play started");
                 });
             }
         }
