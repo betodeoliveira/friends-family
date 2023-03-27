@@ -58,8 +58,6 @@ $(document).ready(function () {
                     console.log("Fullscreen player Auto-play was prevented");
                 }).then(() => {
                     console.log("Fullscreen player Auto-play started");
-                    // If the the auto play is allowed but the video is not playing force it to play
-                    playerVideo.play();
                 });
             }
         }
