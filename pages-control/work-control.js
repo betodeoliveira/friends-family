@@ -4,7 +4,7 @@ $(document).ready(function () {
     // Waits the intro to play
     setTimeout(() => {
         // Hides the work item when it reaches the top of the screen
-        $(".works_item").each(function (index) {
+        $(".works_item-title-component").each(function (index) {
             ScrollTrigger.create({
                 trigger: $(this),
                 start: () => 'top ' + Math.min(viewportWidth(12)),
