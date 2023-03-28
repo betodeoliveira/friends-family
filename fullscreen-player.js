@@ -3,24 +3,24 @@
 // 2. Using native player means that we lose some controls from plyr that's why we have a function to pause the video. 
 $(document).ready(function () {
     let playerInitialNavbarFontSize = $(".navbar_menu-link").css("font-size");
-    let fullscreenPlayers = Plyr.setup((".plyr_video"), {
+    let plyrFullscreenConfig = Plyr.setup((".plyr_video"), {
         controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
         blankVideo: "https://cdn.plyr.io/static/blank.mp4",
-        // Disbales on mobile
+        // Disable on mobile
         enabled: !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent),
         resetOnEnd: false
     });
 
     $("[fullscreen-player-show]").each(function (index) {
         let plyrFullscreenWrapper = $(".plyr-fullscreen_wrapper").eq(index);
-        let playerClose = $(plyrFullscreenWrapper).find(".plyr-fullscreen_close");
-        let playerVideo = $(fullscreenPlayers[index])[0];
-        let playerTimeline = gsap.timeline({
+        let plyrFullscreenClose = $(plyrFullscreenWrapper).find(".plyr-fullscreen_close");
+        let plyrFullscreenVideo = $(plyrFullscreenConfig[index])[0];
+        let fullscreenTimeline = gsap.timeline({
             paused: true,
             onComplete: timelinePlayerPlay,
             onReverseComplete: timelinePlayerStop
         });
-        createPlayerTimeline(plyrFullscreenWrapper);
+        createfullscreenTimeline();
 
         // Sets what happens when the player button is clicked
         $(this).click(function () {
@@ -33,23 +33,23 @@ $(document).ready(function () {
                 $(".plyr-fullscreen_layout").css("padding-top", "18vw");
             }
 
-            playerTimeline.play();
+            fullscreenTimeline.play();
         });
 
         // Sets what happens when the close button is clicked
-        $(playerClose).click(function (e) {
-            // // Prevent the click from going to other elements and triggering the open again
-            // e.stopPropagation();
-            // if (!playerVideo.paused) {
-            //     pauseVideo();
-            // }
-            // playerTimeline.reverse();
+        $(plyrFullscreenClose).click(function (e) {
+            // Prevent the click from going to other elements and triggering the open again
+            e.stopPropagation();
+            if (!plyrFullscreenVideo.paused) {
+                pauseVideo();
+            }
+            fullscreenTimeline.reverse();
         });
 
         function timelinePlayerPlay() {
-            playerVideo.muted = false;
-            playerVideo.volume = 1;
-            let promise = playerVideo.play();
+            plyrFullscreenVideo.muted = false;
+            plyrFullscreenVideo.volume = 1;
+            let promise = plyrFullscreenVideo.play();
             if (promise !== undefined) {
                 promise.catch(error => {
                     // console.log("Fullscreen player Auto-play was prevented");
@@ -61,57 +61,57 @@ $(document).ready(function () {
 
         function timelinePlayerStop() {
             pauseVideo();
-            playerVideo.restart();
+            plyrFullscreenVideo.restart();
             $(plyrFullscreenWrapper).css("display", "none");
         }
 
         // Pauses the video depending if it running on plyr or on native device player
         function pauseVideo() {
-            if(playerVideo.isHTML5) {
-                playerVideo.pause();
+            if(plyrFullscreenVideo.isHTML5) {
+                plyrFullscreenVideo.pause();
             }
             else {
                 $(".plyr_video")[index].pause();
             }
         }
 
-        function createPlayerTimeline(element) {
-            // playerTimeline.to(".navbar_background-color", {
-            //     opacity: 0,
-            //     duration: 0.5
-            // });
+        function createfullscreenTimeline() {
+            fullscreenTimeline.to(".navbar_background-color", {
+                opacity: 0,
+                duration: 0.5
+            });
 
-            // playerTimeline.from($(element).find(".plyr-fullscreen_background"), {
-            //     opacity: 0,
-            //     duration: 0.5
-            // }, 0);
+            fullscreenTimeline.from($(plyrFullscreenWrapper).find(".plyr-fullscreen_background"), {
+                opacity: 0,
+                duration: 0.5
+            }, 0);
 
-            // playerTimeline.fromTo($(element).find(".div-aspect-16x9.is-player"), {
-            //     y: "10rem",
-            //     opacity: 0
-            // }, {
-            //     y: "0rem",
-            //     opacity: 1,
-            //     duration: 0.5,
-            //     ease: "power2.out"
-            // }, 0);
+            fullscreenTimeline.fromTo($(plyrFullscreenWrapper).find(".div-aspect-16x9.is-player"), {
+                y: "10rem",
+                opacity: 0
+            }, {
+                y: "0rem",
+                opacity: 1,
+                duration: 0.5,
+                ease: "power2.out"
+            }, 0);
 
-            // playerTimeline.fromTo($(element).find(".plyr-fullscreen_title"), {
-            //     y: "10rem",
-            //     opacity: 0
-            // }, {
-            //     y: "0rem",
-            //     opacity: 1,
-            //     duration: 0.5,
-            //     ease: "power2.out"
-            // }, 0.25);
+            fullscreenTimeline.fromTo($(plyrFullscreenWrapper).find(".plyr-fullscreen_title"), {
+                y: "10rem",
+                opacity: 0
+            }, {
+                y: "0rem",
+                opacity: 1,
+                duration: 0.5,
+                ease: "power2.out"
+            }, 0.25);
 
-            // playerTimeline.fromTo($(playerClose), {
-            //     opacity: 0,
-            // }, {
-            //     opacity: 1,
-            //     duration: 0.5
-            // }, 0.25);
+            fullscreenTimeline.fromTo($(plyrFullscreenClose), {
+                opacity: 0,
+            }, {
+                opacity: 1,
+                duration: 0.5
+            }, 0.25);
         }
     });
 });

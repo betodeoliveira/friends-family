@@ -1,6 +1,19 @@
 $(document).ready(function () {
     //#region [ Item Scroll ]
     const viewportWidth = (coef) => window.innerWidth * (coef / 100);
+    let paddingTop = 16;
+    let scrollMatchMedia = gsap.matchMedia();
+
+    // Desktop Match Media
+    scrollMatchMedia.add("(min-width: 992px)", () => {
+        paddingTop = 16;
+    });
+
+    // Tablet and below Match Media
+    scrollMatchMedia.add("(max-width: 991px)", () => {
+        paddingTop = 20;
+    });
+
     // Waits the intro to play
     setTimeout(() => {
         // Hides the work item when it reaches the top of the screen
@@ -8,8 +21,8 @@ $(document).ready(function () {
             let tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: $(this),
-                    start: () => 'top ' + Math.min(viewportWidth(16)),
-                    end: () => 'bottom ' + Math.min(viewportWidth(16)),
+                    start: () => 'top ' + Math.min(viewportWidth(paddingTop)),
+                    end: () => 'bottom ' + Math.min(viewportWidth(paddingTop)),
                     scrub: true,
                     // markers: true,
                 }
@@ -17,14 +30,14 @@ $(document).ready(function () {
             tl.to($(this), {
                 opacity: 0,
                 ease: "none",
-            }).set($(this), {pointerEvents: "none"});
+            }).set($(this), { pointerEvents: "none" });
         });
     }, 510);
     //#endregion
 
     //#region [ Item Hover ]
     let matchMedia = gsap.matchMedia();
-    let reloadPage = false; // This is important because each time it reaches the desktop breakpint new timelines and varibales will be created
+    let reloadPage = false; // This is important because each time it reaches the desktop breakpoint new timelines and varibales will be created
 
     // Desktop Match Media
     matchMedia.add("(min-width: 992px)", () => {
