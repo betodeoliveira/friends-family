@@ -18,7 +18,7 @@ $(document).ready(function () {
         if(scrollRealoadPage) {
             window.location.reload();
         }
-        setItemScroll(26);
+        setItemScroll(30);
         scrollRealoadPage = true;
     });
 
