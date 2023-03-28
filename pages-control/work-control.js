@@ -1,38 +1,48 @@
 $(document).ready(function () {
     //#region [ Item Scroll ]
     const viewportWidth = (coef) => window.innerWidth * (coef / 100);
-    let paddingTop = 16;
     let scrollMatchMedia = gsap.matchMedia();
+    let scrollRealoadPage = false;
 
     // Desktop Match Media
     scrollMatchMedia.add("(min-width: 992px)", () => {
-        paddingTop = 16;
+        if(scrollRealoadPage) {
+            window.location.reload();
+        }
+        setItemScroll(16);
+        scrollRealoadPage = true;
     });
 
     // Tablet and below Match Media
     scrollMatchMedia.add("(max-width: 991px)", () => {
-        paddingTop = 26;
+        if(scrollRealoadPage) {
+            window.location.reload();
+        }
+        setItemScroll(26);
+        scrollRealoadPage = true;
     });
 
-    // Waits the intro to play
-    setTimeout(() => {
-        // Hides the work item when it reaches the top of the screen
-        $(".works-list_wrapper").each(function (index) {
-            let tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: $(this),
-                    start: () => 'top ' + Math.min(viewportWidth(paddingTop)),
-                    end: () => 'bottom ' + Math.min(viewportWidth(paddingTop)),
-                    scrub: true,
-                    // markers: true,
-                }
+    function setItemScroll(setItemScroll) {
+        // Waits the intro to play
+        setTimeout(() => {
+            // Hides the work item when it reaches the top of the screen
+            $(".works-list_wrapper").each(function (index) {
+                let scrollTimeline = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: $(this),
+                        start: () => 'top ' + Math.min(viewportWidth(setItemScroll)),
+                        end: () => 'bottom ' + Math.min(viewportWidth(setItemScroll)),
+                        scrub: true,
+                        // markers: true,
+                    }
+                });
+                scrollTimeline.to($(this), {
+                    opacity: 0,
+                    ease: "none",
+                }).set($(this), { pointerEvents: "none" });
             });
-            tl.to($(this), {
-                opacity: 0,
-                ease: "none",
-            }).set($(this), { pointerEvents: "none" });
-        });
-    }, 510);
+        }, 510);
+    }
     //#endregion
 
     //#region [ Item Hover ]
