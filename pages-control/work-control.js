@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     // Tablet and below Match Media
     scrollMatchMedia.add("(max-width: 991px)", () => {
-        paddingTop = 20;
+        paddingTop = 26;
     });
 
     // Waits the intro to play
