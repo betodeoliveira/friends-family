@@ -69,7 +69,7 @@ $(document).ready(function () {
     function setNavbarBackgroundOpacity(opacity) {
         gsap.to(".navbar_background-color", {
             opacity: opacity,
-            duration: 0.5,
+            duration: 0,
             ease: "power1.out"
         });
     }
