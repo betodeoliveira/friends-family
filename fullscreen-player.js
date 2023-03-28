@@ -50,8 +50,8 @@ $(document).ready(function () {
         });
 
         function timelinePlayerPlay() {
-            // playerVideo.muted = false;
-            // playerVideo.volume = 1;
+            playerVideo.muted = false;
+            playerVideo.volume = 1;
             let promise = playerVideo.play();
             if (promise !== undefined) {
                 promise.catch(error => {
