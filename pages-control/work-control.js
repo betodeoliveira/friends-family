@@ -4,30 +4,23 @@ $(document).ready(function () {
     // Waits the intro to play
     setTimeout(() => {
         // Hides the work item when it reaches the top of the screen
-        $(".works_item-title-component").each(function (index) {
-            ScrollTrigger.create({
-                trigger: $(this),
-                start: () => 'top ' + Math.min(viewportWidth(12)),
-                end: () => 'top ' + Math.min(viewportWidth(12)),
-                // markers: true,
-                onEnter: () => {
-                    gsap.to($(this), { x: "-4rem", ease: "power2.out", duration: 0.5 });
-                    gsap.to($(this), { opacity: 0, duration: 0.25 });
-                    $(this).parent(".works_item-wrapper").css("pointerEvents", "none");
-                },
-                onEnterBack: () => {
-                    gsap.to($(this), { x: "0rem", ease: "power2.out", duration: 0.5 });
-                    gsap.to($(this), { opacity: 1, duration: 0.5 });
-                    $(this).parent(".works_item-wrapper").css("pointerEvents", "auto");
+        $(".works-list_wrapper").each(function (index) {
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: $(this),
+                    start: () => 'top ' + Math.min(viewportWidth(16)),
+                    end: () => 'bottom ' + Math.min(viewportWidth(16)),
+                    scrub: true,
+                    // markers: true,
                 }
             });
+            tl.to($(this), {
+                opacity: 0,
+                ease: "none",
+            }).set($(this), {pointerEvents: "none"});
         });
     }, 510);
     //#endregion
-
-    $(window).on('scroll', function() {
-        $(".div-block").css("opacity", 1);
-      });
 
     //#region [ Item Hover ]
     let matchMedia = gsap.matchMedia();
@@ -38,37 +31,40 @@ $(document).ready(function () {
         if (reloadPage) {
             window.location.reload();
         }
-        let thumbPlayers = Plyr.setup((".plyr_thumb"), {
+        let plyrThumbConfig = Plyr.setup((".plyr_thumb"), {
             controls: [],
             blankVideo: "https://cdn.plyr.io/static/blank.mp4",
             resetOnEnd: true
         });
 
-        $(".works_item-wrapper").each(function (index) {
-            let workItemTitleWrapper = $(this).find(".works_item-title-component");
-            let thumbComponent = $(this).find(".works_item-thumb-component");
-            let thumbPlayer = $(thumbPlayers[index])[0];
-            thumbPlayer.stop();
+        $(".works-list_wrapper").each(function (index) {
+            let workSlug = $(this).attr("work-slug");
+            // Configurates the thumb plyr
+            let plyrThumbWrapper = $(".work-plyr-thumb_wrapper").eq(index);
+            let plyrThumbVideo = $(plyrThumbConfig[index])[0];
+            // Make sure thumb player is not playing
+            plyrThumbVideo.stop();
+            // Creates the thumb gsap timeline
             let thumbTimeline = gsap.timeline({
                 paused: true,
                 onReverseComplete: hideThumbComponent
             });
-
-            thumbTimeline.from(thumbComponent, {
+            // Configurates the thumb gsap timeline
+            thumbTimeline.from(plyrThumbWrapper, {
                 opacity: 0,
                 duration: 0.5,
                 ease: "power1.out"
             });
 
-            // The hover most be done here because if we do on the works_item-wrapper the mouse leave will just play when the mouse leaves the screen
-            $(workItemTitleWrapper).on("mouseenter", function () {
-                $(".div-block").css("opacity", 0);
-                if ($(thumbComponent).css("display") == "none") {
-                    $(thumbComponent).css("display", "block");
+            // let workItemTitleWrapper = $(this).find(".works-list_title-wrapper");
+
+            $(this).on("mouseenter", function () {
+                if ($(plyrThumbWrapper).css("display") == "none") {
+                    $(plyrThumbWrapper).css("display", "block");
                     thumbTimeline.play();
-                    thumbPlayer.volume = 0;
-                    thumbPlayer.muted = true;
-                    var promise = thumbPlayer.play();
+                    plyrThumbVideo.volume = 0;
+                    plyrThumbVideo.muted = true;
+                    var promise = plyrThumbVideo.play();
                     if (promise !== undefined) {
                         promise.catch(error => {
                             // console.log("Auto-play was prevented");
@@ -80,22 +76,21 @@ $(document).ready(function () {
             });
 
             // Hides animated thumb on leave
-            $(workItemTitleWrapper).on("mouseleave", function () {
+            $(this).on("mouseleave", function () {
                 thumbTimeline.reverse();
-                thumbPlayer.pause();
+                plyrThumbVideo.pause();
             });
 
             function hideThumbComponent() {
-                $(thumbComponent).css("display", "none");
-                thumbPlayer.stop();
+                $(plyrThumbWrapper).css("display", "none");
+                plyrThumbVideo.stop();
             }
         });
     });
 
     // Tablet and below Match Media
     matchMedia.add("(max-width: 991px)", () => {
-        $(".works_item-thumb-component").css("display", "none");
-        $(".works_item-thumb-component").css("opacity", "0");
+        $(".work-plyr-thumb_component").css("display", "none");
         reloadPage = true;
     });
     //#endregion

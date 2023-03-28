@@ -11,42 +11,39 @@ $(document).ready(function () {
         resetOnEnd: false
     });
 
-    $(".fullscreen-player_component").each(function (index) {
-        let playerComponent = $(this);
-        let playerShow = $(this).parents("[fullscreen-player-show]");
-        let playerClose = $(this).find(".fullscreen-player_close");
+    $("[fullscreen-player-show]").each(function (index) {
+        let plyrFullscreenWrapper = $(".plyr-fullscreen_wrapper").eq(index);
+        let playerClose = $(plyrFullscreenWrapper).find(".plyr-fullscreen_close");
         let playerVideo = $(fullscreenPlayers[index])[0];
         let playerTimeline = gsap.timeline({
             paused: true,
             onComplete: timelinePlayerPlay,
             onReverseComplete: timelinePlayerStop
         });
-
-        createPlayerTimeline($(this));
+        createPlayerTimeline(plyrFullscreenWrapper);
 
         // Sets what happens when the player button is clicked
-        $(playerShow).click(function () {
-            if ($(playerComponent).css("display") == "none") {
-                let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
-                if (playerInitialNavbarFontSize != currentNavbarFontSize) {
-                    $(".fullscreen-player_wrapper").css("padding-top", "12vw");
-                }
-                else {
-                    $(".fullscreen-player_wrapper").css("padding-top", "18vw");
-                }
-                $(playerComponent).css("display", "flex");
-                playerTimeline.play();
+        $(this).click(function () {
+            $(plyrFullscreenWrapper).css("display", "flex");
+            let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
+            if (playerInitialNavbarFontSize != currentNavbarFontSize) {
+                $(".plyr-fullscreen_layout").css("padding-top", "12vw");
             }
-        })
+            else {
+                $(".plyr-fullscreen_layout").css("padding-top", "18vw");
+            }
+
+            playerTimeline.play();
+        });
 
         // Sets what happens when the close button is clicked
         $(playerClose).click(function (e) {
-            // Prevent the click from going to other elements and triggering the open again
-            e.stopPropagation();
-            if (!playerVideo.paused) {
-                pauseVideo();
-            }
-            playerTimeline.reverse();
+            // // Prevent the click from going to other elements and triggering the open again
+            // e.stopPropagation();
+            // if (!playerVideo.paused) {
+            //     pauseVideo();
+            // }
+            // playerTimeline.reverse();
         });
 
         function timelinePlayerPlay() {
@@ -55,9 +52,9 @@ $(document).ready(function () {
             let promise = playerVideo.play();
             if (promise !== undefined) {
                 promise.catch(error => {
-                    console.log("Fullscreen player Auto-play was prevented");
+                    // console.log("Fullscreen player Auto-play was prevented");
                 }).then(() => {
-                    console.log("Fullscreen player Auto-play started");
+                    // console.log("Fullscreen player Auto-play started");
                 });
             }
         }
@@ -65,7 +62,7 @@ $(document).ready(function () {
         function timelinePlayerStop() {
             pauseVideo();
             playerVideo.restart();
-            $(playerComponent).css("display", "none");
+            $(plyrFullscreenWrapper).css("display", "none");
         }
 
         // Pauses the video depending if it running on plyr or on native device player
@@ -79,42 +76,42 @@ $(document).ready(function () {
         }
 
         function createPlayerTimeline(element) {
-            playerTimeline.to(".navbar_background-color", {
-                opacity: 0,
-                duration: 0.5
-            });
+            // playerTimeline.to(".navbar_background-color", {
+            //     opacity: 0,
+            //     duration: 0.5
+            // });
 
-            playerTimeline.from($(element).find(".fullscreen-player_background"), {
-                opacity: 0,
-                duration: 0.5
-            }, 0);
+            // playerTimeline.from($(element).find(".plyr-fullscreen_background"), {
+            //     opacity: 0,
+            //     duration: 0.5
+            // }, 0);
 
-            playerTimeline.fromTo($(element).find(".div-aspect-16x9.is-player"), {
-                y: "10rem",
-                opacity: 0
-            }, {
-                y: "0rem",
-                opacity: 1,
-                duration: 0.5,
-                ease: "power2.out"
-            }, 0);
+            // playerTimeline.fromTo($(element).find(".div-aspect-16x9.is-player"), {
+            //     y: "10rem",
+            //     opacity: 0
+            // }, {
+            //     y: "0rem",
+            //     opacity: 1,
+            //     duration: 0.5,
+            //     ease: "power2.out"
+            // }, 0);
 
-            playerTimeline.fromTo($(element).find(".fullscreen-player_title"), {
-                y: "10rem",
-                opacity: 0
-            }, {
-                y: "0rem",
-                opacity: 1,
-                duration: 0.5,
-                ease: "power2.out"
-            }, 0.25);
+            // playerTimeline.fromTo($(element).find(".plyr-fullscreen_title"), {
+            //     y: "10rem",
+            //     opacity: 0
+            // }, {
+            //     y: "0rem",
+            //     opacity: 1,
+            //     duration: 0.5,
+            //     ease: "power2.out"
+            // }, 0.25);
 
-            playerTimeline.fromTo($(playerClose), {
-                opacity: 0,
-            }, {
-                opacity: 1,
-                duration: 0.5
-            }, 0.25);
+            // playerTimeline.fromTo($(playerClose), {
+            //     opacity: 0,
+            // }, {
+            //     opacity: 1,
+            //     duration: 0.5
+            // }, 0.25);
         }
     });
 });
