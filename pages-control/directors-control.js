@@ -35,7 +35,7 @@ $(document).ready(function () {
 
             // Shows animated thumb on hover
             $(directorButton).on("mouseenter", function () {
-                $(thumbWrapper).css("display", "block");
+                $(thumbWrapper).css("display", "flex");
                 thumbTimeline.play();
                 thumbPlayer.volume = 0;
                 thumbPlayer.muted = true;
