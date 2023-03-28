@@ -52,15 +52,14 @@ $(document).ready(function () {
         function timelinePlayerPlay() {
             playerVideo.muted = false;
             playerVideo.volume = 1;
-            playerVideo.play();
-            // let promise = playerVideo.play();
-            // if (promise !== undefined) {
-            //     promise.catch(error => {
-            //         console.log("Fullscreen player Auto-play was prevented");
-            //     }).then(() => {
-            //         console.log("Fullscreen player Auto-play started");
-            //     });
-            // }
+            let promise = playerVideo.play();
+            if (promise !== undefined) {
+                promise.catch(error => {
+                    console.log("Fullscreen player Auto-play was prevented");
+                }).then(() => {
+                    console.log("Fullscreen player Auto-play started");
+                });
+            }
         }
 
         function timelinePlayerStop() {
