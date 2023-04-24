@@ -1,7 +1,8 @@
-// Observations:
-// 1. Plyr doesn't go on landingscape when video is on fullscreen. So we are disabling it on mobile and using the native player;
-// 2. Using native player means that we lose some controls from plyr that's why we have a function to pause the video. 
-$(document).ready(function () {
+/* Observations:
+ 1. Plyr doesn't go on landingscape when video is on fullscreen. So we are disabling it on mobile and using the native player;
+ 2. Using native player means that we lose some controls from plyr that's why we have a function to pause the video. 
+ */
+document.addEventListener("DOMContentLoaded", function () {
     let playerInitialNavbarFontSize = $(".navbar_menu-link").css("font-size");
     let plyrFullscreenConfig = Plyr.setup((".plyr_video"), {
         controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
@@ -76,7 +77,7 @@ $(document).ready(function () {
         }
 
         function createfullscreenTimeline() {
-            fullscreenTimeline.to(".navbar_background-color", {
+            fullscreenTimeline.to(".navbar_background", {
                 opacity: 0,
                 duration: 0.5
             });

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function (e) {
     //#region [ Item Hover ]
     let matchMedia = gsap.matchMedia();
     let reloadPage = false; // This is important because each time it reaches the desktop breakpint new timelines and varibales will be created
