@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+$(document).ready(function () {
     //#region [ Item Scroll ]
     const viewportWidth = (coef) => window.innerWidth * (coef / 100);
     let scrollMatchMedia = gsap.matchMedia();

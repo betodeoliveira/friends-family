@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function (e) {
+$(document).ready(function () {
     //#region [ Item Hover ]
     let matchMedia = gsap.matchMedia();
     let reloadPage = false; // This is important because each time it reaches the desktop breakpint new timelines and varibales will be created
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
             // Shows animated thumb on hover
             $(directorButton).on("mouseenter", function () {
-                $(thumbWrapper).css("display", "block");
+                $(thumbWrapper).css("display", "flex");
                 thumbTimeline.play();
                 thumbPlayer.volume = 0;
                 thumbPlayer.muted = true;

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function (e) {
+$(document).ready(function () {
     let matchMedia = gsap.matchMedia();
 
     let introTimeline = gsap.timeline({
