@@ -109,6 +109,7 @@ $(document).ready(function () {
         $(directorTitleMove).appendTo($(".directors-template_name-wrapper"));
         Flip.from(directorMoveTitleState, {
             duration: 0.5,
+            scale: false,
             ease: "power1.out"
         });
     }
