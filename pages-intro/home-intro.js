@@ -20,7 +20,10 @@ Webflow.push(function () {
     $("[letters-fade-in]").each(function (index) {
         let tl = gsap.timeline({
             paused: false,
-            onComplete: () => playVideo()
+            onComplete: () => {
+                flipTitle();
+                playVideo();
+            }
         });
         tl.from($(this).find(".char"), {
             opacity: 0,
@@ -44,18 +47,30 @@ Webflow.push(function () {
         $("video", this).get(0).pause();
     });
 
+    function flipTitle() {
+        gsap.to($(".home-her_eyes-wrapper"), {opacity: 1, duration: 0.5});
+        let titleState = Flip.getState(".home-hero_heading");
+        $(".home-hero_heading").appendTo($(".home-hero_logo-bottom-wrapper"));
+        $(".home-hero_heading").css("font-size", "3vw");
+        Flip.from(titleState, {
+            duration: 1,
+            scale: true,
+            ease: "power2.out"
+        });
+    }
+
     function playVideo() {
         // console.log("Play Video");
         let myVideo = $(backgroundVid.get(0)).find('video');
         myVideo.get(0).play();
         myVideo.prop('muted', true);
-        gsap.to($(".home-hero_background-video"), { 
-            opacity: 1, 
-            duration: backgroundVideoFadeInTime ,
+        gsap.to($(".home-hero_background-video"), {
+            opacity: 1,
+            duration: backgroundVideoFadeInTime,
             delay: backgroundDelay
         });
-        gsap.to($(".navbar_menu-layout"), { 
-            opacity: 1, 
+        gsap.to($(".navbar_menu-layout"), {
+            opacity: 1,
             duration: navbarFadeInTime,
             delay: navbarDelay
         });
