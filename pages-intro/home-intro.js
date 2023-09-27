@@ -51,7 +51,7 @@ Webflow.push(function () {
         gsap.to($(".home-her_eyes-wrapper"), {opacity: 1, duration: 0.5});
         let titleState = Flip.getState(".home-hero_heading");
         $(".home-hero_heading").appendTo($(".home-hero_logo-bottom-wrapper"));
-        $(".home-hero_heading").css("font-size", "3vw");
+        $(".home-hero_heading").css("font-size", "1.6rem");
         Flip.from(titleState, {
             duration: 1,
             scale: true,
