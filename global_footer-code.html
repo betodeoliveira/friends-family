@@ -1,0 +1,107 @@
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<!-- Scroll Trigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+<!-- Scroll Smoother -->
+<script src="https://betodeoliveira.github.io/friends-family/scroll-smoother.js"></script>
+<!-- GSAP Flip -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+<!-- Plyr.io -->
+<script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
+
+<!-- GSAP Registers -->
+<script>
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+</script>
+
+<!-- Animated Thumbnails -->
+<script>
+    let matchMedia = gsap.matchMedia();
+    let reloadPage = false; // This is important because each time it reaches the desktop breakpint new timelines and varibales will be created
+
+    // Desktop Match Media
+    matchMedia.add("(min-width: 992px)", () => {
+        if (reloadPage) {
+            window.location.reload();
+        }
+
+        $(".animated-thumnails_thumb-wrapper").css("display", "block");
+        let thumbPlayers = Plyr.setup((".plyr_thumb"), {
+            controls: [],
+            blankVideo: "https://cdn.plyr.io/static/blank.mp4",
+            resetOnEnd: true,
+        });
+
+        $(".animated-thumnails_wrapper").each(function (index) {
+            let directorWorkButton = $(this).find(".animated-thumnails_button");
+            let titleWrapper = $(this).find(".animated-thumnails_title-wrapper");
+            let mainTitle = $(this).find(".animated-thumnails_main-title");
+            let secondTitle = $(this).find(".animated-thumnails_second-title");
+            let thumbWrapper = $(this).find(".animated-thumnails_thumb-wrapper");
+            let thumbPlayer = $(thumbPlayers[index])[0];
+            thumbPlayer.stop();
+
+            let directorWorkTimeline = gsap.timeline({
+                paused: true,
+                onReverseComplete: hideThumbComponent
+            });
+
+            directorWorkTimeline.to(thumbWrapper, {
+                opacity: 1,
+                duration: 0.3,
+                ease: "power1.out"
+            });
+
+            directorWorkTimeline.from(mainTitle, {
+                y: "4rem",
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.out"
+            });
+
+            directorWorkTimeline.from(secondTitle, {
+                y: "4rem",
+                opacity: 0,
+                delay: 0.125,
+                duration: 0.5,
+                ease: "power2.out"
+            }, "<");
+
+            $(directorWorkButton).on("mouseenter", function () {
+                $(titleWrapper).css("display", "flex");
+                directorWorkTimeline.play();
+                thumbPlayer.valume = 0;
+                thumbPlayer.muted = true;
+                var promise = thumbPlayer.play();
+                if (promise !== undefined) {
+                    promise.catch(error => {
+                        console.log("Thumb Auto-play was prevented");
+                    }).then(() => {
+                        console.log("Thumb Auto-play started");
+                    });
+                }
+            });
+
+            $(directorWorkButton).on("mouseleave", function () {
+                directorWorkTimeline.reverse();
+            });
+
+            $(directorWorkButton).on("click", function () {
+                directorWorkTimeline.reverse();
+            });
+
+            function hideThumbComponent() {
+                $(titleWrapper).css("display", "none");
+                thumbPlayer.stop();
+            }
+        });
+    });
+
+    // Tablet and below Match Media
+    matchMedia.add("(max-width: 991px)", () => {
+        $(".animated-thumnails_title-wrapper").css("display", "flex");
+        $(".animated-thumnails_thumb-wrapper").css("display", "none");
+        $(".animated-thumnails_thumb-wrapper").css("opacity", "0");
+        reloadPage = true;
+    });
+</script>
