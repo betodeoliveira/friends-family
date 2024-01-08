@@ -1,14 +1,13 @@
 <script>
     const backgroundVid = $(".is-embed-video");
     const myVideo = $(backgroundVid.get(0)).find('video');
-    const blueMaskDelay = 2;
-    const blueMask = $(".home-hero_background-video-mask");
 
+    // Configure the video
     backgroundVid.each(function () {
         $("video", this).get(0).pause();
     });
-    // Play video as soon as page finishes loading
     myVideo.prop('muted', true);
+    // Play video as soon as page finishes loading
     let promise = myVideo.get(0).play();
     if (promise !== undefined) {
         promise.catch(error => {
@@ -17,10 +16,11 @@
             console.log("Thumb Auto-play started");
         });
     }
-    // Display the blue mask
-    gsap.to((blueMask), {
-        opacity: 1,
-        duration: 0.5,
-        delay: blueMaskDelay
-    });     
+
+    const timeline = gsap.timeline({ paused: true, ease: "power2.out" });
+    timeline.to(".home-hero_background-video-mask", {opacity: 1, duration: 0.5, delay: 2});
+    timeline.to(".home-hero_eyes-wrapper", {opacity: 1, duration: 0.5});
+    timeline.to(".navbar_brand-link", {opacity: 1, duration: 0.5});
+    timeline.to("[navbar-link]", {opacity: 1, stagger: 0.2}, "<");
+    timeline.play();
 </script>
