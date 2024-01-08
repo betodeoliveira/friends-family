@@ -29,6 +29,7 @@
     let nextPageLink;
     let nextPageBackgroundColor;
     let nextPageNavbarLinksColor;
+    let nextPageLogo;
     let pageLeaveTimeline;
 
     // What happens when a link from the navbar is clicked
@@ -40,9 +41,11 @@
         nextPageBackgroundColor = $(this).attr("page-background-color");
         if(nextPageBackgroundColor == "white") {
             nextPageNavbarLinksColor = "#2400ff";
+            nextPageLogo = $("")
         }
         else {
             nextPageNavbarLinksColor = "#ffffff";
+            nextPageLogoBrightness = "100%";
         }
         playLeave();
     });
@@ -50,6 +53,7 @@
     function playLeave() {
         pageLeaveTimeline = gsap.timeline({
             paused: false,
+            ease: "power1.out",
             onComplete: gotToNextPage
         });
 
@@ -60,21 +64,24 @@
         pageLeaveTimeline.to(".content-wrapper", {
             opacity: 0,
             duration: 0.3,
-            ease: "power1.out"
         });
 
         // Changes the background color
         pageLeaveTimeline.to(".page-background-color", {
             backgroundColor: nextPageBackgroundColor,
             duration: 0.3,
-            ease: "power1.out"
         }, 0);
 
         // Changes the navbar link colors
         pageLeaveTimeline.to("[navbar-link]", {
             color: nextPageNavbarLinksColor,
             duration: 0.5,
-            ease: "power1.out"
+        }, 0);
+
+        // Changes the navbar logo
+        pageLeaveTimeline.to(".navbar_brand-logo", {
+            filter: "brightness("+ nextPageLogoBrightness +")",
+            duration: 0.5,
         }, 0);
     }
 
