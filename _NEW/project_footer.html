@@ -24,331 +24,71 @@
     });
 </script>
 
-<!-- Refresh on breakpoint change -->
-<!-- <script>
-    /*
-    The usability of the website changes a lot from desktop to mobile (tablet and below) so to prevent a lot of adjustments we refresh the page if the break point changes
-    */
-    document.addEventListener("DOMContentLoaded", function () {
+<!-- Page Leave -->
+<script>
+    let nextPageLink;
+    let nextPageBackgroundColor;
+    let nextPageNavbarLinksColor;
+    let pageLeaveTimeline;
 
-        let reloadPage = false;
-        let matchMedia = gsap.matchMedia();
-
-        // Desktop
-        matchMedia.add("(min-width: 992px)", () => {
-            if (reloadPage) {
-                window.location.reload();
-            }
-            reloadPage = true;
-        });
-
-        // Tablet
-        matchMedia.add("(max-width: 991px)", () => {
-            if (reloadPage) {
-                window.location.reload();
-            }
-            reloadPage = true;
-        });
+    // What happens when a link from the navbar is clicked
+    $("[page-transition]:not(.w--current)").on("click", function (e) {
+        // Prevents the link to load the page
+        e.preventDefault();
+        // Sets the variables
+        nextPageLink = $(this).attr("href");
+        nextPageBackgroundColor = $(this).attr("page-background-color");
+        if(nextPageBackgroundColor == "white") {
+            nextPageNavbarLinksColor = "#2400ff";
+        }
+        else {
+            nextPageNavbarLinksColor = "#ffffff";
+        }
+        playLeave();
     });
-</script> -->
 
-<!-- Animated Thumbnails -->
-<!-- <script>
-    let matchMedia = gsap.matchMedia();
-    let reloadPage = false; // This is important because each time it reaches the desktop breakpint new timelines and varibales will be created
+    function playLeave() {
+        pageLeaveTimeline = gsap.timeline({
+            paused: false,
+            onComplete: gotToNextPage
+        });
 
-    // Desktop Match Media
-    matchMedia.add("(min-width: 992px)", () => {
-        if (reloadPage) {
+        // The content shouldn't be clickable
+        $(".content-wrapper").css("pointer-events", "none");
+
+        // Hides the current content
+        pageLeaveTimeline.to(".content-wrapper", {
+            opacity: 0,
+            duration: 0.3,
+            ease: "power1.out"
+        });
+
+        // Changes the background color
+        pageLeaveTimeline.to(".page-background-color", {
+            backgroundColor: nextPageBackgroundColor,
+            duration: 0.3,
+            ease: "power1.out"
+        }, 0);
+
+        // Changes the navbar link colors
+        pageLeaveTimeline.to("[navbar-link]", {
+            color: nextPageNavbarLinksColor,
+            duration: 0.5,
+            ease: "power1.out"
+        }, 0);
+    }
+
+    function gotToNextPage() {
+        window.location = nextPageLink;
+    }
+
+    // Realods the page on back
+    window.onpageshow = function (event) {
+        if (event.persisted) {
             window.location.reload();
         }
-
-        $(".animated-thumnails_thumb-wrapper").css("display", "block");
-        let thumbPlayers = Plyr.setup((".plyr_thumb"), {
-            controls: [],
-            blankVideo: "https://cdn.plyr.io/static/blank.mp4",
-            resetOnEnd: true,
-        });
-
-        $(".animated-thumnails_wrapper").each(function (index) {
-            let directorWorkButton = $(this).find(".animated-thumnails_button");
-            let titleWrapper = $(this).find(".animated-thumnails_title-wrapper");
-            let mainTitle = $(this).find(".animated-thumnails_main-title");
-            let secondTitle = $(this).find(".animated-thumnails_second-title");
-            let thumbWrapper = $(this).find(".animated-thumnails_thumb-wrapper");
-            let thumbPlayer = $(thumbPlayers[index])[0];
-            thumbPlayer.stop();
-
-            let directorWorkTimeline = gsap.timeline({
-                paused: true,
-                onReverseComplete: hideThumbComponent
-            });
-
-            directorWorkTimeline.to(thumbWrapper, {
-                opacity: 1,
-                duration: 0.3,
-                ease: "power1.out"
-            });
-
-            directorWorkTimeline.from(mainTitle, {
-                y: "4rem",
-                opacity: 0,
-                duration: 0.5,
-                ease: "power2.out"
-            });
-
-            directorWorkTimeline.from(secondTitle, {
-                y: "4rem",
-                opacity: 0,
-                delay: 0.125,
-                duration: 0.5,
-                ease: "power2.out"
-            }, "<");
-
-            $(directorWorkButton).on("mouseenter", function () {
-                $(titleWrapper).css("display", "flex");
-                directorWorkTimeline.play();
-                thumbPlayer.valume = 0;
-                thumbPlayer.muted = true;
-                var promise = thumbPlayer.play();
-                if (promise !== undefined) {
-                    promise.catch(error => {
-                        console.log("Thumb Auto-play was prevented");
-                    }).then(() => {
-                        console.log("Thumb Auto-play started");
-                    });
-                }
-            });
-
-            $(directorWorkButton).on("mouseleave", function () {
-                directorWorkTimeline.reverse();
-            });
-
-            $(directorWorkButton).on("click", function () {
-                directorWorkTimeline.reverse();
-            });
-
-            function hideThumbComponent() {
-                $(titleWrapper).css("display", "none");
-                thumbPlayer.stop();
-            }
-        });
-    });
-
-    // Tablet and below Match Media
-    matchMedia.add("(max-width: 991px)", () => {
-        $(".animated-thumnails_title-wrapper").css("display", "flex");
-        $(".animated-thumnails_thumb-wrapper").css("display", "none");
-        $(".animated-thumnails_thumb-wrapper").css("opacity", "0");
-        reloadPage = true;
-    });
-</script> -->
-
-<!-- <script>
-    document.addEventListener("DOMContentLoaded", function () {
-
-        // Navbar Variables
-        const bigFontSize = "9.5vw"; // Make sure to validate on webflow
-        const smallFontSize = "2vw";
-
-        let smallMargin = "0.5vw";
-        let bigMargin = "1.5vw";
-
-        let currentSmallFontSize = smallFontSize;
-        let navbarIsSmall = false;
-        let matchMedia = gsap.matchMedia();
-
-        // Prevents the current link to be cliekd
-        $("[page-transition-link]:is(.w--current)").on("click", function (e) {
-            e.preventDefault();
-        });
-
-        // Desktop Match Media
-        matchMedia.add("(min-width: 992px)", () => {
-            currentSmallFontSize = smallFontSize;
-            if (navbarIsSmall) {
-                setNavbarFontSize(currentSmallFontSize);
-            }
-            else {
-                setNavbarFontSize(bigFontSize);
-            }
-        });
-
-        // Tablet and below Match Media
-        matchMedia.add("(max-width: 991px)", () => {
-            currentSmallFontSize = bigFontSize;
-            bigMargin = "1.5vw";
-            smallMargin = bigMargin;
-            setNavbarFontSize(bigFontSize);
-        });
-
-        // Navigation
-        ScrollTrigger.create({
-            trigger: $(".navbar_trigger"),
-            start: "top top",
-            end: "top top",
-            markers: false,
-            onEnter: () => {
-                navbarIsSmall = true;
-                setNavbarBackgroundOpacity(1);
-                setNavbarFontSize(currentSmallFontSize);
-                setNavbarLinksMargin(smallMargin);
-            },
-            onEnterBack: () => {
-                navbarIsSmall = false;
-                setNavbarBackgroundOpacity(0);
-                setNavbarFontSize(bigFontSize);
-                setNavbarLinksMargin(bigMargin);
-            }
-        });
-
-        // Transition Variables
-        let nextPageLink;
-        let nextPageBackgroundColor;
-        let nextPageNavbarLinksColor;
-        let regularTransitionTimeline;
-
-        // When page transition link is clicked
-        $("[page-transition-link]:not(.w--current").on("click", function (e) {
-            // Prevents the link to load the page
-            e.preventDefault();
-            // Sets the variables
-            nextPageLink = $(this).attr("href");
-            nextPageBackgroundColor = $(this).attr("page-background-color");
-            nextPageNavbarLinksColor = $(this).attr("navbar-links-color");
-            setNavbarBackgroundOpacity(0);
-            // New link opacity
-            setCustomElementOpacity($(this), 0.5);
-            // Current link opacity
-            setCustomElementOpacity($(".navbar_menu-link.w--current"), 1);
-            setNavbarFontSize(bigFontSize);
-            setNavbarLinksMargin(bigMargin);
-            playLeave();
-        });
-
-        function playLeave() {
-            regularTransitionTimeline = gsap.timeline({
-                paused: false,
-                onComplete: gotToNextPage
-            });
-
-            // The content shouldn't be clickable
-            $(".content-wrapper").css("pointer-events", "none");
-
-            // Hides the current content
-            regularTransitionTimeline.to(".content-wrapper", {
-                opacity: 0,
-                duration: 0.3,
-                ease: "power1.out"
-            });
-
-            // Changes the background color
-            regularTransitionTimeline.to(".page-background-color", {
-                backgroundColor: nextPageBackgroundColor,
-                duration: 0.3,
-                ease: "power1.out"
-            }, 0);
-
-            // Changes the navbar link colors
-            regularTransitionTimeline.to(".navbar_menu-link", {
-                color: nextPageNavbarLinksColor,
-                duration: 0.5,
-                ease: "power1.out"
-            }, 0);
-
-            // Background noise
-            if (nextPageBackgroundColor == "#ffffff") {
-                regularTransitionTimeline.to(".page-noise_over-blue, navbar_background-noise, .footer_background-noise", {
-                    opacity: 0.3,
-                    duration: 0.5,
-                    ease: "power1.out"
-                }, 0);
-            }
-            else {
-                regularTransitionTimeline.to(".page-noise_over-white, navbar_background-noise, .footer_background-noise", {
-                    opacity: 1,
-                    duration: 0.5,
-                    ease: "power1.out"
-                }, 0);
-            }
-
-            // Footer
-            regularTransitionTimeline.to(".footer_background", {
-                backgroundColor: nextPageBackgroundColor,
-                duration: 0.3,
-                ease: "power1.out"
-            }, 0);
-            regularTransitionTimeline.to(".footer_layout", {
-                borderTopColor: nextPageNavbarLinksColor,
-                duration: 0.3,
-                ease: "power1.out"
-            }, 0);
-            regularTransitionTimeline.to(".footer_component, .footer_brand-link, .footer_link", {
-                color: nextPageNavbarLinksColor,
-                duration: 0.3,
-                ease: "power1.out"
-            }, 0);
-            regularTransitionTimeline.to(".footer_eye-wrapper", {
-                borderColor: nextPageNavbarLinksColor,
-                duration: 0.3,
-                ease: "power1.out"
-            }, 0);
-            regularTransitionTimeline.to(".footer_eye-pupil", {
-                backgroundColor: nextPageNavbarLinksColor,
-                duration: 0.3,
-                ease: "power1.out"
-            }, 0);
-        }
-
-        function setNavbarFontSize(fontSize) {
-            gsap.to(".navbar_menu-link", {
-                fontSize: fontSize,
-                duration: 0.5,
-                ease: "power1.out"
-            });
-        }
-
-        function setNavbarLinksMargin(margin) {
-            gsap.to(".navbar_menu-link", {
-                marginLeft: margin,
-                duration: 0.5,
-                ease: "power1.out"
-            });
-            gsap.to(".navbar_menu-link", {
-                marginRight: margin,
-                duration: 0.5,
-                ease: "power1.out"
-            });
-        }
-
-        function setNavbarBackgroundOpacity(opacity) {
-            gsap.to(".navbar_background", {
-                opacity: opacity,
-                duration: 0,
-                ease: "power1.out"
-            });
-        }
-
-        function setCustomElementOpacity(element, opacity) {
-            gsap.to(element, {
-                opacity: opacity,
-                duration: 0.5,
-                ease: "power1.out"
-            });
-        }
-
-        function gotToNextPage() {
-            window.location = nextPageLink;
-        }
-
-        // Realods the page on back
-        window.onpageshow = function (event) {
-            if (event.persisted) {
-                window.location.reload();
-            }
-        };
-    });
-</script> -->
+    };
+</script>
 
 <!-- Code Snipets -->
 <script>
