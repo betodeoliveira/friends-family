@@ -39,7 +39,7 @@
         // Sets the variables
         nextPageLink = $(this).attr("href");
         nextPageBackgroundColor = $(this).attr("page-background-color");
-        if(nextPageBackgroundColor == "white") {
+        if (nextPageBackgroundColor == "white") {
             nextPageNavbarLinksColor = "#2400ff";
             nextPageLogo = $("")
         }
@@ -72,6 +72,12 @@
             duration: 0.3,
         }, 0);
 
+        // Changes the navbar background color
+        pageLeaveTimeline.to(".navbar_background", {
+            backgroundColor: nextPageBackgroundColor,
+            duration: 0.3,
+        }, 0);
+
         // Changes the navbar link colors
         pageLeaveTimeline.to("[navbar-link]", {
             color: nextPageNavbarLinksColor,
@@ -80,7 +86,7 @@
 
         // Changes the navbar logo
         pageLeaveTimeline.to(".navbar_brand-logo", {
-            filter: "brightness("+ nextPageLogoBrightness +")",
+            filter: "brightness(" + nextPageLogoBrightness + ")",
             duration: 0.5,
         }, 0);
     }
