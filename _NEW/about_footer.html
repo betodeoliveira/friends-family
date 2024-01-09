@@ -1,0 +1,129 @@
+<!-- Intro -->
+<script>
+    let matchMedia = gsap.matchMedia();
+
+    let introTimeline = gsap.timeline({
+        paused: false,
+        onComplete: enablePageEvents
+    });
+
+    // Disables page events at first
+    $(".content-wrapper").css("pointer-events", "none");
+    $(".content-wrapper").css("opacity", "1");
+
+    window.fsAttributes = window.fsAttributes || [];
+    window.fsAttributes.push([
+        'cmsload',
+        (listInstances) => {
+            const [listInstance] = listInstances;
+            configureItemHover();
+            
+            // Desktop Match Media
+            matchMedia.add("(min-width: 992px)", () => {
+                setIntroTimeline("random");
+            });
+
+            // Tablet and below Match Media
+            matchMedia.add("(max-width: 991px)", () => {
+                // setIntroTimeline("start");
+            });
+        },
+    ]);
+
+    function setIntroTimeline(staggerFrom) {
+        // Kills the old timeline
+        introTimeline.progress(0).kill();
+        introTimeline.to($(".about-gallery_item"), {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power1.out",
+            stagger: { amount: 1, from: staggerFrom }
+        });
+    }
+
+    function enablePageEvents() {
+        $(".content-wrapper").css("pointer-events", "auto");
+    }
+</script>
+
+<!-- Control -->
+<script>
+    function configureItemHover() {
+        // Because we are waiting for CMS Load we must refresh GSAP Scroll Trigger
+        ScrollTrigger.refresh();
+
+        let matchMedia = gsap.matchMedia();
+
+        let picturesPerRow = 14;
+
+        // Tablet
+        matchMedia.add("(max-width: 991px)", () => {
+            picturesPerRow = 7;
+        });
+
+        // Adapt the transform origin of the first row
+        for (let i = 0; i < picturesPerRow; i++) {
+            let highImage = $(".about-gallery_item").eq(i).find(".about-gallery_high-res-image-wrapper");
+            if (i == 0) {
+                $(highImage).css("transform-origin", "0% 0%");
+            }
+            else if (i == (picturesPerRow - 1)) {
+                $(highImage).css("transform-origin", "100% 0%");
+            }
+            else {
+                $(highImage).css("transform-origin", "50% 0%");
+            }
+        }
+
+        // Adapt the transform origin of the last row
+        for (let i = 294 - picturesPerRow; i < 294; i++) {
+            let highImage = $(".about-gallery_item").eq(i).find(".about-gallery_high-res-image-wrapper");
+            if (i == (294 - picturesPerRow)) {
+                $(highImage).css("transform-origin", "0% 100%");
+            }
+            else if (i == 293) {
+                $(highImage).css("transform-origin", "100% 100%");
+            }
+            else {
+                $(highImage).css("transform-origin", "50% 100%");
+            }
+        }
+
+        // Adapt the transform origin of the first column
+        for (let i = picturesPerRow; i < 294 - picturesPerRow; i += picturesPerRow) {
+            let highImage = $(".about-gallery_item").eq(i).find(".about-gallery_high-res-image-wrapper");
+            $(highImage).css("transform-origin", "0% 50%");
+        }
+
+        // Adapt the transform origin of the last column
+        for (let i = (picturesPerRow * 2) - 1; i < 294 - picturesPerRow; i += picturesPerRow) {
+            let highImage = $(".about-gallery_item").eq(i).find(".about-gallery_high-res-image-wrapper");
+            $(highImage).css("transform-origin", "100% 50%");
+        }
+
+        // Configurates the hover effect
+        $(".about-gallery_item").each(function (i) {
+            let highImage = $(this).find(".about-gallery_high-res-image-wrapper");
+
+            $(this).on("mouseenter", function () {
+                $(highImage).css("z-index", "2");
+                gsap.killTweensOf(highImage);
+                gsap.set(highImage, { opacity: 1, duration: 0 });
+                gsap.to(highImage, { scale: 3, duration: 1, ease: "power4.out" });
+            });
+
+            $(this).on("mouseleave", function () {
+                $(highImage).css("z-index", "1");
+                gsap.killTweensOf(highImage);
+                gsap.to(highImage, {
+                    scale: 1, duration: 0.5, ease: "power1.out",
+                    onComplete: () => {
+                        // if (!gsap.isTweening(highImage)) {
+                        gsap.set(highImage, { opacity: 0, duration: 0 });
+                        // }
+                    }
+                });
+            });
+        });
+    }
+</script>

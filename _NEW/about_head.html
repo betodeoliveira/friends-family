@@ -1,0 +1,22 @@
+<style>
+    /* To avoid flicker hides the content before playing the intro animation */
+    .content-wrapper {
+        opacity: 0;
+    }
+
+    /* Makes it visible if it is in edit mode */
+    html.w-editor .content-wrapper {
+        opacity: 1;
+    }
+
+    .about-gallery_item {
+        opacity: 0;
+    }
+
+    html.w-editor .about-gallery_item {
+        opacity: 1;
+    }
+</style>
+
+<!-- [Attributes by Finsweet] CMS Load -->
+<script async src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsload@1/cmsload.js"></script>
