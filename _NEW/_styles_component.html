@@ -8,37 +8,28 @@
         opacity: 0.5 !important;
     }
 
-    /* White */
-    .navbar_component[background-color="white"] .navbar_background {
-        background-color: var(--white);
+    .navbar_dropdown-link.w--current {
+        opacity: 0.5 !important;
     }
 
-    .navbar_component[background-color="white"] [navbar-link] {
-        color: var(--blue);
+    .navbar_dropdown-link:hover {
+        opacity: 0.5 !important;
     }
 
-    .navbar_component[background-color="white"] .navbar_brand-logo {
-        filter: brightness(100%);
+    /* White Smoke */
+    .navbar_component[background-color="white-smoke"] .navbar_background {
+        background-color: var(--white-smoke);
     }
 
-    .navbar_component[background-color="white"] .navbar_background-noise.is-over-white {
-        display: block;
+    .navbar_component[background-color="white-smoke"] [navbar-link] {
+        color: var(--black);
     }
 
-    /* Blue */
-    .navbar_component[background-color="blue"] .navbar_background {
-        background-color: var(--blue);
+    .navbar_component[background-color="white-smoke"] .navbar_dropdown-link {
+        color: var(--black);
     }
 
-    .navbar_component[background-color="blue"] [navbar-link] {
-        color: var(--white);
-    }
-
-    .navbar_component[background-color="blue"] .navbar_brand-logo {
-        filter: brightness(100%);
-    }
-
-    .navbar_component[background-color="blue"] .navbar_background-noise.is-over-blue {
+    .navbar_component[background-color="white-smoke"] .navbar_background-noise {
         display: block;
     }
 </style>

@@ -78,6 +78,7 @@
     //#endregion
 
     //#region [ Item Hover ]
+    let isHoverItem = false;
     let matchMedia = gsap.matchMedia();
     let reloadPage = false; // This is important because each time it reaches the desktop breakpoint new timelines and varibales will be created
     let workTimeline = gsap.timeline({
@@ -127,6 +128,7 @@
             // let workItemTitleWrapper = $(this).find(".works-list_title-wrapper");
 
             $(this).on("mouseenter", function () {
+                isHoverItem = true;
                 if ($(plyrThumbWrapper).css("display") == "none") {
                     $(plyrThumbWrapper).css("display", "block");
                     thumbTimeline.play();
@@ -140,13 +142,14 @@
                             // console.log("Auto-play started");
                         });
                     }
-                    workTimeline.duration(0.125);
-                    workTimeline.play();
+                    workTimeline.duration(0);
+                    workTimeline.restart();
                 };
             });
 
             // Hides animated thumb on leave
             $(this).on("mouseleave", function () {
+                isHoverItem = false;
                 thumbTimeline.reverse();
                 plyrThumbVideo.pause();
             });
@@ -154,8 +157,10 @@
             function hideThumbComponent() {
                 $(plyrThumbWrapper).css("display", "none");
                 plyrThumbVideo.stop();
-                workTimeline.duration(0.25);
-                workTimeline.reverse();
+                if (!isHoverItem) {
+                    workTimeline.duration(0.25);
+                    workTimeline.reverse();
+                }
             }
         });
     });

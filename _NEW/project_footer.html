@@ -29,7 +29,6 @@
     let nextPageLink;
     let nextPageBackgroundColor;
     let nextPageNavbarLinksColor;
-    let nextPageLogo;
     let pageLeaveTimeline;
 
     // What happens when a link from the navbar is clicked
@@ -39,11 +38,11 @@
         // Sets the variables
         nextPageLink = $(this).attr("href");
         nextPageBackgroundColor = $(this).attr("page-background-color");
-        if (nextPageBackgroundColor == "white") {
-            nextPageNavbarLinksColor = "#2400ff";
+        if($(this).attr("navbar-links-color") !== undefined) {
+            nextPageNavbarLinksColor = $(this).attr("navbar-links-color");
         }
         else {
-            nextPageNavbarLinksColor = "#ffffff";
+            nextPageNavbarLinksColor = "#0e0e0e";
         }
         playLeave();
     });
@@ -87,12 +86,6 @@
             color: nextPageNavbarLinksColor,
             duration: 0.5,
         }, 0);
-
-        // Changes the navbar logo
-        // pageLeaveTimeline.to(".navbar_brand-logo", {
-        //     filter: "brightness(" + nextPageLogoBrightness + ")",
-        //     duration: 0.5,
-        // }, 0);
     }
 
     function gotToNextPage() {
