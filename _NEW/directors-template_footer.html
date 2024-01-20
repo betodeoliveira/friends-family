@@ -19,6 +19,13 @@
         ease: "power2.out"
     });
 
+    directorsTemplateIntroTimeline.fromTo("[page-leave]", {
+        opacity: 0 }, {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        }, 0);
+
     function enablePageEvents() {
         $(".content-wrapper").css("pointer-events", "auto");
         // GSAP add some styles that must be removed to the thumb player and video player work as expected

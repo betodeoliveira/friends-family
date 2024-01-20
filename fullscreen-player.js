@@ -1,7 +1,9 @@
-// Observations:
-// 1. Plyr doesn't go on landingscape when video is on fullscreen. So we are disabling it on mobile and using the native player;
-// 2. Using native player means that we lose some controls from plyr that's why we have a function to pause the video. 
-$(document).ready(function () {
+
+/* Observations:
+ 1. Plyr doesn't go on landingscape when video is on fullscreen. So we are disabling it on mobile and using the native player;
+ 2. Using native player means that we lose some controls from plyr that's why we have a function to pause the video. 
+ */
+document.addEventListener("DOMContentLoaded", function () {
     let playerInitialNavbarFontSize = $(".navbar_menu-link").css("font-size");
     let plyrFullscreenConfig = Plyr.setup((".plyr_video"), {
         controls: ['play', 'progress', 'current-time', 'mute', 'fullscreen'],
@@ -25,13 +27,13 @@ $(document).ready(function () {
         // Sets what happens when the player button is clicked
         $(this).click(function () {
             $(plyrFullscreenWrapper).css("display", "flex");
-            let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
-            if (playerInitialNavbarFontSize != currentNavbarFontSize) {
-                $(".plyr-fullscreen_layout").css("padding-top", "12vw");
-            }
-            else {
-                $(".plyr-fullscreen_layout").css("padding-top", "18vw");
-            }
+            // let currentNavbarFontSize = $(".navbar_menu-link").css("font-size");
+            // if (playerInitialNavbarFontSize != currentNavbarFontSize) {
+            //     $(".plyr-fullscreen_layout").css("padding-top", "12vw");
+            // }
+            // else {
+            //     $(".plyr-fullscreen_layout").css("padding-top", "18vw");
+            // }
 
             fullscreenTimeline.play();
         });
@@ -67,7 +69,7 @@ $(document).ready(function () {
 
         // Pauses the video depending if it running on plyr or on native device player
         function pauseVideo() {
-            if(plyrFullscreenVideo.isHTML5) {
+            if (plyrFullscreenVideo.isHTML5) {
                 plyrFullscreenVideo.pause();
             }
             else {
@@ -76,7 +78,7 @@ $(document).ready(function () {
         }
 
         function createfullscreenTimeline() {
-            fullscreenTimeline.to(".navbar_background-color", {
+            fullscreenTimeline.to(".navbar_background", {
                 opacity: 0,
                 duration: 0.5
             });
