@@ -63,6 +63,12 @@
             duration: 0.3,
         });
 
+        // Hide content outside the wrapper
+        pageLeaveTimeline.to("[page-leave]", {
+            opacity: 0,
+            duration: 0.3,
+        }, 0);
+
         // Changes the background color
         pageLeaveTimeline.to(".page-background-color", {
             backgroundColor: nextPageBackgroundColor,
