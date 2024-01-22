@@ -18,9 +18,12 @@
     }
 
     const timeline = gsap.timeline({ paused: true, ease: "power2.out" });
-    timeline.to(".home-hero_background-video-mask", {opacity: 1, duration: 0.5, delay: 2});
-    timeline.to(".home-hero_eyes-wrapper", {opacity: 1, duration: 0.5});
-    timeline.to(".navbar_brand-link", {opacity: 1, duration: 0.5});
-    timeline.to("[navbar-link]", {opacity: 1, stagger: 0.2}, "<");
+    timeline.to(".home-hero_background-video-mask", { opacity: 1, duration: 0.5, delay: 2 });
+    timeline.to(".navbar_brand-link", { opacity: 1, duration: 0.5 });
+    let mm = gsap.matchMedia();
+    mm.add("(min-width: 992px)", () => {
+        timeline.to(".home-hero_eyes-wrapper", { opacity: 1, duration: 0.5 });
+        timeline.to("[navbar-link]", { opacity: 1, stagger: 0.2 }, "<");
+    });
     timeline.play();
 </script>
