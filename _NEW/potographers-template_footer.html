@@ -1,0 +1,121 @@
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+<!-- Intro -->
+<script>
+    let directorsTemplateIntroTimeline = gsap.timeline({
+        paused: false,
+        onComplete: enablePageEvents
+    });
+
+    // Disables page events at first
+    $(".content-wrapper").css("pointer-events", "none");
+
+    // Configurates the timeline
+    directorsTemplateIntroTimeline.fromTo(".director-works_collection", {
+        y: "50vh",
+        opacity: 0
+    }, {
+        y: "0vh",
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    directorsTemplateIntroTimeline.fromTo("[page-leave]", {
+        opacity: 0
+    }, {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.out"
+    }, 0);
+
+    function enablePageEvents() {
+        $(".content-wrapper").css("pointer-events", "auto");
+        // GSAP add some styles that must be removed to the thumb player and video player work as expected
+        $(".director-works_collection").removeAttr("style");
+        // If we set the contect to opacity 0 when the page loads the name o director will blink, so we hide the collection and after removing the style set it to opacoty 1
+        $(".director-works_collection").css("opacity", "1");
+    }
+</script>
+
+<!-- Masonry Grid  -->
+<script>
+    var $masonry = $('.masonry').imagesLoaded(function () {
+        $('.masonry').masonry({
+            itemSelector: '.masonry-item'
+        });
+    });
+
+</script>
+
+<!-- Control -->
+<script>
+    // Waits webflow and then adds the w--current class to the directors navbar link
+    var Webflow = Webflow || [];
+    Webflow.push(function () {
+        $("#nav-link-potographers").addClass("w--current");
+    });
+
+    //#region [ About ]
+    let aboutComponent = $(".director-about_component");
+    let aboutBackground = $(".director-about_background");
+    let aboutLeftWrapper = $(".director-about_left-wrapper");
+    let aboutRightWrapper = $(".director-about_right-wrapper");
+    let aboutClose = $(".director-about_close");
+
+    let aboutTimeline = gsap.timeline({
+        paused: true,
+        onReverseComplete: hideAboutComponent
+    });
+
+    aboutTimeline.fromTo(aboutBackground, {
+        opacity: 0,
+    }, {
+        opacity: 1,
+        duration: 0.3
+    });
+
+    aboutTimeline.fromTo(aboutLeftWrapper, {
+        opacity: 0,
+        y: "4rem"
+    }, {
+        opacity: 1,
+        y: "0rem",
+        duration: 0.5
+    });
+
+    aboutTimeline.fromTo(aboutRightWrapper, {
+        opacity: 0,
+        y: "4rem"
+    }, {
+        opacity: 1,
+        y: "0rem",
+        duration: 0.5
+    }, "<0.25");
+
+    aboutTimeline.fromTo(aboutClose, {
+        opacity: 0
+    }, {
+        opacity: 1,
+        duration: 0.5
+    }, "<0.25");
+
+    $(".director-about-button").click(function () {
+        if ($(aboutComponent).css("display") == "none") {
+            $(aboutComponent).css("display", "flex");
+            aboutTimeline.play();
+        }
+    });
+
+    $(aboutClose).click(function (e) {
+        // Prevent the click from going to other elements and triggering the open again
+        e.stopPropagation();
+        aboutTimeline.reverse();
+    });
+
+    function hideAboutComponent() {
+        $(aboutComponent).css("display", "none");
+    }
+    //#endregion
+</script>
