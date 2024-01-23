@@ -56,8 +56,27 @@
     Webflow.push(function () {
         $("#nav-link-potographers").addClass("w--current");
     });
+</script>
 
-    //#region [ About ]
+<!-- Hover -->
+<script>
+    $(".photographer-pics_lightbox-link").each(function (i) {
+        let image = $(this).find(".photographer-pics_image");
+
+        $(this).on("mouseenter", function () {
+            gsap.killTweensOf(image);
+            gsap.to(image, { scale: 1.02, duration: 0.5, ease: "power4.out"  });
+        });
+
+        $(this).on("mouseleave", function () {
+            gsap.killTweensOf(image);
+            gsap.to(image, { scale: 1, duration: 0.5, ease: "power4.out"  });
+        });
+    });
+</script>
+
+<!-- About -->
+<script>
     let aboutComponent = $(".director-about_component");
     let aboutBackground = $(".director-about_background");
     let aboutLeftWrapper = $(".director-about_left-wrapper");
