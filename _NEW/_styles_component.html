@@ -16,25 +16,28 @@
         opacity: 0.5 !important;
     }
 
-    /* White Smoke */
-    .navbar_component[background-color="white-smoke"] .navbar_background {
-        background-color: var(--white-smoke);
-    }
-
-    .navbar_component[background-color="white-smoke"] [navbar-link] {
-        color: var(--black);
-    }
-
-    .navbar_component[background-color="white-smoke"] .navbar_dropdown-link {
-        color: var(--black);
-    }
-
-    .navbar_component[background-color="white-smoke"] .navbar_background-noise {
-        display: block;
-    }
-
     /* Transparent */
+    .navbar_component[background-color="transparent"] .navbar_background {
+        background-color: transparent;
+    }
+
+    .navbar_component[background-color="transparent"] [navbar-link] {
+        color: var(--white);
+    }
+
+    .navbar_component[background-color="transparent"] .navbar_dropdown-link {
+        color: var(--white);
+    }
+
     .navbar_component[background-color="transparent"] .navbar_dropdown-background {
+        background-color: transparent;
+    }
+</style>
+
+<!-- Footer -->
+<style>
+    /* Transparent */
+    .footer_component[background-color="transparent"] .footer_background {
         background-color: transparent;
     }
 </style>
