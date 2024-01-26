@@ -104,4 +104,7 @@
 <script>
     // Get full year
     $("[get-full-year]").text(new Date().getFullYear());
+
+    // Hide if collection is empty
+    $('.w-dyn-empty').parents('[hide-if-empty]').each(function () { $(this).hide() });
 </script>
